@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">F1ManagerUI</string>
+    <string name="title_activity_main">F1 Manager</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="MenuTeam">Team</string>
+    <string name="MenuPilots">Pilots</string>
+    <string name="MenuFinance">Finance</string>
+    <string name="MenuCars">Cars</string>
+    <string name="MenuRace">NEXT RACE</string>
+    <string name="MenuManager">Manager</string>
+    <string name="title_activity_pilots">Pilots</string>
+    <string name="title_activity_display_message">DisplayMessageActivity</string>
+    <string name="newGame">New Game</string>
+    <string name="continueGame">Continue</string>
+    <string name="credits">Credits</string>
+    <string name="howTo">How To Play</string>
+    <string name="exit">Exit</string>
+    <string name="title_activity_team">Team</string>
+    <string name="title_activity_select_game_mode">SelectGameModeActivity</string>
+    <string name="select_game_mode_label">Select Game Mode</string>
+    <string name="single_team_button">Single Team Mode</string>
+    <string name="single_team_description">In this mode you will pick a existing team or create your own and make it the best team of F1 history.</string>
+    <string name="manager_button">Manager Mode</string>
+    <string name="manager_description">In this mode you can be hired or fired depending of your managing skills. You will be given a random starter team. Be the best and most famous team manager of history.</string>
+    <string name="title_activity_create_or_pick_team">CreateOrPickTeamActivity</string>
+    <string name="select_team_label">Select your team:</string>
+    <string name="team_ferrari">Ferrari</string>
+    <string name="team_rbr">Red Bull Racing</string>
+    <string name="team_williams">Williams</string>
+    <string name="team_sauber">Sauber</string>
+    <string name="team_maclaren">McLaren</string>
+    <string name="team_force">Force India</string>
+    <string name="team_marussia">Marussia</string>
+    <string name="team_catherham">Catherham</string>
+    <string name="team_lotus">Lotus</string>
+    <string name="team_mercedes">Mercedes</string>
+    <string name="team_tororosso">Toro Rosso</string>
+    <string name="button_create_team">Create-a-Team</string>
+    <string name="button_next">Next</string>
+    <string name="button_back">Back</string>
+    <string name="title_activity_create_team">CreateTeamActivity</string>
+    <string name="title_activity_create_manager">CreateManagerActivity</string>
+    <string name="selected_mode">Selected Mode</string>
+    <string name="selected_manager_name">Manager Name</string>
+    <string name="selected_manager_country">Manager Country</string>
+    <string name="selected_team">Selected Team</string>
+    <string name="selected_team_country">Selected Team Country</string>
+    <string name="selected_team_colors">Selected Colors</string>
+
+    <string-array name="teams_array">
+        <item>Ferrari</item>
+        <item>Red Bull Racing</item>
+        <item>Williams</item>
+        <item>Sauber</item>
+        <item>McLaren</item>
+        <item>Force India</item>
+        <item>Marussia</item>
+        <item>Catherham</item>
+        <item>Lotus</item>
+        <item>Mercedes</item>
+        <item>Toro Rosso</item>
+    </string-array>
+
+    <string name="title_activity_confirm_start_game">ConfirmStartGameActivity</string>
+    <string name="title_activity_next_race">NextRaceActivity</string>
+
+</resources>

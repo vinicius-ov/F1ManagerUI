@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.f1managerui"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.f1managerui.F1Manager"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.PilotsActivity"
+            android:label="@string/title_activity_pilots" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.DisplayMessageActivity"
+            android:label="@string/title_activity_display_message" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.TeamActivity"
+            android:label="@string/title_activity_team" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.SelectGameModeActivity"
+            android:label="@string/title_activity_select_game_mode" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.SelectTeamActivity"
+            android:label="@string/title_activity_create_or_pick_team" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.CreateTeamActivity"
+            android:label="@string/title_activity_create_team" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.CreateManagerActivity"
+            android:label="@string/title_activity_create_manager" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.ConfirmStartGameActivity"
+            android:label="@string/title_activity_confirm_start_game" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.NextRaceActivity"
+            android:label="@string/title_activity_next_race" >
+        </activity>
+    </application>
+
+</manifest>
