@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.f1managerui.F1Manager"
+            android:name="com.digitreko.ui.f1managerui.F1Manager"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,40 +26,62 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.f1managerui.PilotsActivity"
+            android:name="com.digitreko.ui.f1managerui.BaseTabbedNavigationActivity"
             android:label="@string/title_activity_pilots" >
         </activity>
         <activity
-            android:name="com.example.f1managerui.DisplayMessageActivity"
+            android:name="com.digitreko.ui.f1managerui.PilotsFragment"
+            android:label="@string/title_activity_pilots" >
+        </activity>
+        <activity
+            android:name="com.digitreko.ui.f1managerui.DisplayMessageActivity"
             android:label="@string/title_activity_display_message" >
         </activity>
         <activity
-            android:name="com.example.f1managerui.TeamActivity"
+            android:name="com.digitreko.ui.f1managerui.TeamFragment"
             android:label="@string/title_activity_team" >
         </activity>
         <activity
-            android:name="com.example.f1managerui.SelectGameModeActivity"
+            android:name="com.digitreko.ui.f1managerui.SelectGameModeActivity"
             android:label="@string/title_activity_select_game_mode" >
         </activity>
         <activity
-            android:name="com.example.f1managerui.SelectTeamActivity"
+            android:name="com.digitreko.ui.f1managerui.SelectTeamActivity"
             android:label="@string/title_activity_create_or_pick_team" >
         </activity>
         <activity
-            android:name="com.example.f1managerui.CreateTeamActivity"
+            android:name="com.digitreko.ui.f1managerui.CreateTeamActivity"
             android:label="@string/title_activity_create_team" >
         </activity>
         <activity
-            android:name="com.example.f1managerui.CreateManagerActivity"
+            android:name="com.digitreko.ui.f1managerui.CreateManagerActivity"
             android:label="@string/title_activity_create_manager" >
         </activity>
         <activity
-            android:name="com.example.f1managerui.ConfirmStartGameActivity"
+            android:name="com.digitreko.ui.f1managerui.ConfirmStartGameActivity"
             android:label="@string/title_activity_confirm_start_game" >
         </activity>
         <activity
-            android:name="com.example.f1managerui.NextRaceActivity"
+            android:name="com.digitreko.ui.f1managerui.NextRaceFragment"
             android:label="@string/title_activity_next_race" >
+        </activity>
+        <activity
+            android:name="com.digitreko.ui.f1managerui.FinanceFragment"
+            android:label="@string/title_activity_finance" >
+        </activity>
+        <activity
+            android:name="com.digitreko.ui.f1managerui.PilotActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_pilot"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="com.example.f1managerui.TabsPageAdapter"
+            android:label="@string/title_activity_tabs_page_adapter" >
+        </activity>
+        <activity
+            android:name="com.digitreko.ui.f1managerui.PilotMoreInfoActivity"
+            android:label="@string/title_activity_pilot_more_info" >
         </activity>
     </application>
 
