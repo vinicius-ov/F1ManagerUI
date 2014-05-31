@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TextView01"
+        android:layout_below="@+id/reputation11"
         android:ems="10"
         android:inputType="textPersonName" >
 
@@ -36,7 +36,7 @@
     </EditText>
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/reputation11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -44,7 +44,7 @@
         android:text="Country" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/creditsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

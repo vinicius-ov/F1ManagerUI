@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText" >
+
+    <ImageView
+        android:id="@+id/raceCarUpgrade"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <Button
+        android:id="@+id/upgradeTires"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="52dp"
+        android:onClick="popAlertUpgradeTires"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/upgradeSuspension"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/suspensionLevel"
+        android:onClick="popAlertUpgradeSuspension"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/upgradeEngine"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView03"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="58dp"
+        android:onClick="popAlertUpgradeEngine"
+        android:text="+" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextView06"
+        android:layout_alignBottom="@+id/TextView06"
+        android:layout_toLeftOf="@+id/engineLevel"
+        android:text="Engine  "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/playerCashToUpgrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Balance: 4 600 000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/upgradeFrontWing"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/upgradeTires"
+        android:layout_alignBottom="@+id/upgradeTires"
+        android:layout_alignParentRight="true"
+        android:onClick="popAlertUpgradeFrontWing"
+        android:text="+" />
+
+    <TextView
+        android:id="@+id/engineLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/upgradeEngine"
+        android:layout_alignParentLeft="true"
+        android:text="Lvl 2"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/TextView06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/suspensionLevel"
+        android:layout_alignParentRight="true"
+        android:text="Suspension "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/engineLevel"
+        android:layout_alignParentLeft="true"
+        android:text="Engine"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/brakesLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="Lvl X"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/upgradeBrakes"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/brakesLevel"
+        android:onClick="popAlertUpgradeBrakes"
+        android:text="+" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tiresLevel"
+        android:layout_alignParentLeft="true"
+        android:text="Tires  "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tiresLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/upgradeFrontWing"
+        android:layout_alignRight="@+id/brakesLevel"
+        android:text="Lvl 4"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/aerodynamicsLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/upgradeFrontWing"
+        android:layout_alignParentRight="true"
+        android:text="Lvl 5"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/suspensionLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/engineLevel"
+        android:layout_alignBottom="@+id/engineLevel"
+        android:layout_alignRight="@+id/textView3"
+        android:text="Lvl 4"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/aerodynamicsLevel"
+        android:layout_alignParentRight="true"
+        android:text="Aerodynamics"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/brakesLevel"
+        android:layout_alignParentLeft="true"
+        android:text="Brakes"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

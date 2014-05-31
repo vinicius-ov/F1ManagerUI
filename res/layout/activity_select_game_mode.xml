@@ -9,50 +9,40 @@
     tools:context=".SelectGameModeActivity" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/select_game_mode_label"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="19dp"
-        android:onClick="setSingleTeamMode"
-        android:text="@string/single_team_button" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button1"
-        android:text="@string/single_team_description"
-        android:textSize="@dimen/description_text_size" />
-
-    <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/exitBtn"
         android:text="@string/manager_description"
         android:textSize="@dimen/description_text_size" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/exitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/nationalityManager"
         android:layout_marginTop="30dp"
         android:onClick="setManagerMode"
         android:text="@string/manager_button" />
+
+    <Button
+        android:id="@+id/creditsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:onClick="setSingleTeamMode"
+        android:text="@string/single_team_button" />
+
+    <TextView
+        android:id="@+id/nationalityManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/creditsBtn"
+        android:text="@string/single_team_description"
+        android:textSize="@dimen/description_text_size" />
 
 </RelativeLayout>
