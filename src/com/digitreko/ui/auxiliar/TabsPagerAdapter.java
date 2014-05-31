@@ -1,8 +1,11 @@
 package com.digitreko.ui.auxiliar;
 
+import java.io.ObjectInputStream.GetField;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.text.style.UpdateAppearance;
 
 import com.digitreko.ui.f1managerui.FinanceFragment;
 import com.digitreko.ui.f1managerui.ManagerFragment;
@@ -11,7 +14,7 @@ import com.digitreko.ui.f1managerui.PilotsFragment;
 import com.digitreko.ui.f1managerui.TeamFragment;
 import com.digitreko.ui.f1managerui.UpgradeCarFragment;
 
-public class TabsPagerAdapter extends FragmentPagerAdapter {
+public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 
 	private static final int NUMBER_OF_FRAGMENTS = 6;
 
@@ -23,14 +26,16 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int index) {
 
 		switch (index) {
-		case 0:
+		case 0:			
 			return new NextRaceFragment();
 		case 1:
 			return new TeamFragment();
 		case 2:        				
 			return new PilotsFragment();
-		case 3:
+		case 3:{
+			//UpgradeCarFragment ucf = new UpgradeCarFragment();
 			return new UpgradeCarFragment();
+		}
 		case 4:
 			return new FinanceFragment();
 		case 5:			

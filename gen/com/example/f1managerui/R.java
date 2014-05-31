@@ -128,12 +128,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int textViewSelectedTeamCountry=0x7f0a000c;
         public static final int textViewTeamName=0x7f0a000b;
         public static final int tiresLevel=0x7f0a0046;
-        public static final int trainPilot1=0x7f0a0039;
-        public static final int trainPilot2=0x7f0a003a;
+        public static final int trainPilot1=0x7f0a003a;
+        public static final int trainPilot2=0x7f0a0039;
         public static final int txtTitle=0x7f0a0058;
+        public static final int upgradeAerodynamics=0x7f0a0042;
         public static final int upgradeBrakes=0x7f0a0045;
         public static final int upgradeEngine=0x7f0a003e;
-        public static final int upgradeFrontWing=0x7f0a0042;
         public static final int upgradeSuspension=0x7f0a003c;
         public static final int upgradeTires=0x7f0a0024;
         public static final int yearsManager=0x7f0a0029;

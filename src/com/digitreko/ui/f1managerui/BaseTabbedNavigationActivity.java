@@ -48,7 +48,7 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
             @Override
             public void onPageSelected(int position) {
                 // on changing the page
-                // make respected tab selected
+                // make respected tab selected            	
                 actionBar.setSelectedNavigationItem(position);
             }
  
@@ -60,10 +60,13 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+        
     }
  
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    	
+    	
     }
  
     @Override
@@ -77,6 +80,9 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
     	
     }
+    
+
+
  
 }
 

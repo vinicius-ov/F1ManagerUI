@@ -1,8 +1,12 @@
 package com.digitreko.games.model;
 
+import java.lang.reflect.Modifier;
+
 public abstract class CarPart {
 
 	private static final int MAXCONDITION = 100;
+	private static final int INITIAL_COST = 100000;
+	private static final double PRICE_MODIFIER = 1.3;
 	private String brand;
 	private double condition;
 	private int power;
@@ -37,8 +41,17 @@ public abstract class CarPart {
 		this.power = power;
 	}
 	
+	
 	public int costToRepair(){
 		return (((int)condition - MAXCONDITION)*(power*10000));
+	}
+	
+	public int costToUpgrade(){
+		if (power < 2){		
+			return INITIAL_COST * power;
+		}else{
+			return (int)((double)INITIAL_COST * (double)power * PRICE_MODIFIER);
+		}
 	}
 	
 	public boolean wearPart(int skill, int aggro, int diff){

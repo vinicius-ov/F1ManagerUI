@@ -11,7 +11,7 @@ public class Team {
 	private final int MAX_COLORS = 2;
 	private final int INITIAL_VALUE_NEW_GAME = 1;
 	private final int INITIAL_PILOT_SKILL = 50;
-	private final int INITIAL_FUNDS_PLAYER_CONTROLLED = 300000;	//TODO:need to define values to balance gameplay
+	private final int INITIAL_FUNDS_PLAYER_CONTROLLED = 3000000;	//TODO:need to define values to balance gameplay
 	private final int INITIAL_FUNDS_AI_CONTROLLED = 10000000;
 
 	private String name;			//name of team
@@ -443,7 +443,7 @@ public class Team {
 		planners = INITIAL_VALUE_NEW_GAME;
 		funds = INITIAL_FUNDS_PLAYER_CONTROLLED;
 		for (RaceCar car: cars){
-			car.getBreaks().setPower(INITIAL_VALUE_NEW_GAME);
+			car.getBrakes().setPower(INITIAL_VALUE_NEW_GAME);
 			car.getSuspension().setPower(INITIAL_VALUE_NEW_GAME);
 			car.getTires().setPower(INITIAL_VALUE_NEW_GAME);
 			car.getEngine().setPower(INITIAL_VALUE_NEW_GAME);

@@ -161,7 +161,7 @@ public class RaceCar{
 		this.suspension = suspension;
 	}
 
-	public CarPart getBreaks() {
+	public CarPart getBrakes() {
 		return breaks;
 	}
 

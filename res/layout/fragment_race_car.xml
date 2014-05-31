@@ -65,7 +65,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/upgradeFrontWing"
+        android:id="@+id/upgradeAerodynamics"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
         android:id="@+id/tiresLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/upgradeFrontWing"
+        android:layout_above="@+id/upgradeAerodynamics"
         android:layout_alignRight="@+id/brakesLevel"
         android:text="Lvl 4"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -143,7 +143,7 @@
         android:id="@+id/aerodynamicsLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/upgradeFrontWing"
+        android:layout_above="@+id/upgradeAerodynamics"
         android:layout_alignParentRight="true"
         android:text="Lvl 5"
         android:textAppearance="?android:attr/textAppearanceSmall" />
