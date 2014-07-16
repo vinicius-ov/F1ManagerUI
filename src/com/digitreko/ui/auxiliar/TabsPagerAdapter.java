@@ -17,6 +17,7 @@ import com.digitreko.ui.f1managerui.UpgradeCarFragment;
 public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 
 	private static final int NUMBER_OF_FRAGMENTS = 6;
+	//public static FinanceFragment fm = ;
 
 	public TabsPagerAdapter(FragmentManager fm) {		
 		super(fm);

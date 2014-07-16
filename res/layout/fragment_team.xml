@@ -64,67 +64,94 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
+        android:id="@+id/checkNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Check News" />
+
+    <Button
         android:id="@+id/checkMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="16dp"
         android:text="Check Mail (0)" />
 
     <Button
-        android:id="@+id/checkNews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/checkMail"
-        android:text="Check News" />
-
-    <TextView
-        android:id="@+id/textEngineersTeam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/projectedBalanceTeam"
-        android:layout_marginTop="31dp"
-        android:text="Engineering Level: 3"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textRandDTeam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textEngineersTeam"
-        android:text="R &amp; D Level: 2 "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textRacePlannersTeam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textRandDTeam"
-        android:text="Race Planners Level: 7"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/teamUpgradeStats"
+        android:id="@+id/trainReD"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textRacePlannersTeam"
-        android:layout_toRightOf="@+id/textFanCountTeam"
+        android:layout_alignLeft="@+id/trainPlanners"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/trainEngineers"
         android:minHeight="24dp"
-        android:text="Upgrade Team Stats..." />
+        android:onClick="upgradeTeamRandD"
+        android:text="Train R&amp;D" />
+
+    <Button
+        android:id="@+id/trainPlanners"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/trainEngineers"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/trainReD"
+        android:minHeight="24dp"
+        android:onClick="upgradeTeamPlanners"
+        android:text="Train Planners" />
+
+    <TextView
+        android:id="@+id/randdLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/trainReD"
+        android:layout_alignBottom="@+id/trainReD"
+        android:layout_alignParentLeft="true"
+        android:text="R&amp;D Level 12"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/engineerLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/trainEngineers"
+        android:layout_alignBottom="@+id/trainEngineers"
+        android:layout_alignParentLeft="true"
+        android:text="Engineers Level 10"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/plannersLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/trainPlanners"
+        android:layout_alignBottom="@+id/trainPlanners"
+        android:layout_alignParentLeft="true"
+        android:text="Planners Level 99"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/trainEngineers"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/projectedBalanceTeam"
+        android:layout_marginTop="36dp"
+        android:minHeight="24dp"
+        android:onClick="upgradeTeamEngineers"
+        android:text="Train Engineers" />
 
     <TextView
         android:id="@+id/textFanCountTeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/teamUpgradeStats"
-        android:layout_marginTop="22dp"
+        android:layout_below="@+id/trainPlanners"
+        android:layout_marginTop="23dp"
         android:text="Fan Count: 412320"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

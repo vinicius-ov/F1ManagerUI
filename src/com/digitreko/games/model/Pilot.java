@@ -1,9 +1,19 @@
 package com.digitreko.games.model;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 
-public class Pilot{
+public class Pilot implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4469746419058530889L;
+	
+	private final int INITIAL_VALUE = 1000;
+	private static final int MAXLEVEL = 100;	
+	private static final double PRICE_MODIFIER = 1.8;
+	
 	private String name;
 	private int skill;
 	private int age;
@@ -12,10 +22,11 @@ public class Pilot{
 	private int maxSalary;
 	private int currentSalary;
 	private int moral;
-	private Integer outcomeAccumulator;
+	private int outcomeAccumulator;
 	private int seasonPoints;
 	private String fileName;
     
+	
 	public Pilot(){
 		
 	}
@@ -289,20 +300,38 @@ public class Pilot{
 		}		
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "Pilot [name=" + name + ", skill=" + skill + ", age=" + age
-				+ ", reputation=" + reputation + ", minSalary=" + minSalary
-				+ ", maxSalary=" + maxSalary + ", currentSalary="
-				+ currentSalary + ", moral=" + moral + ", outcomeAccumulator="
-				+ outcomeAccumulator + ", seasonPoints=" + seasonPoints
-				+ ", fileName=" + fileName + "]";
+		return "Pilot [INITIAL_VALUE=" + INITIAL_VALUE + ", name=" + name
+				+ ", skill=" + skill + ", age=" + age + ", reputation="
+				+ reputation + ", minSalary=" + minSalary + ", maxSalary="
+				+ maxSalary + ", currentSalary=" + currentSalary + ", moral="
+				+ moral + ", outcomeAccumulator=" + outcomeAccumulator
+				+ ", seasonPoints=" + seasonPoints + ", fileName=" + fileName
+				+ "]";
 	}
-	
+
 	public void createSalary(){
 		minSalary = (int)Salary.minimumSalary(skill);
 		maxSalary = (int) Math.round(minSalary * Salary.moralFactor(moral));
 		currentSalary = minSalary + (int)(Math.random() * ((maxSalary - minSalary) + 1));
+	}
+	
+	public int costToUpgrade(){
+		if (skill <= 50){		
+			return INITIAL_VALUE * skill;
+		}else{
+			return (int)((double)INITIAL_VALUE * (double)skill * PRICE_MODIFIER);
+		}
+	}
+
+	public boolean isMaxLevel() {
+		if (skill < MAXLEVEL)
+			return false;
+		else
+			return true;
 	}
 	
 

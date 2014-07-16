@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.digitreko.games.model.CarPart;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.RaceCar;
 import com.digitreko.games.model.Team;
@@ -26,7 +29,13 @@ import com.example.f1managerui.R;
  
 public class PilotsFragment extends Fragment {
  
-	Team playerTeam;
+	private final String SKILL_MESSAGE = "Overall Skill: ";
+	private Team playerTeam;	
+	private TextView skill1;
+	private TextView skill2;
+	private Button trainPilot1;
+	private Button trainPilot2;
+	private TextView fundsText;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +56,23 @@ public class PilotsFragment extends Fragment {
             	toast.show();
             }
         });
+        trainPilot1 = (Button) rootView.findViewById(R.id.trainPilot1);
+        trainPilot1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+            	//gotoMarketScreen(v);
+            	popAlertTrainPilot(v, 0);
+            }
+        });
+        trainPilot2 = (Button) rootView.findViewById(R.id.trainPilot2);
+        trainPilot2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+            	popAlertTrainPilot(v, 1);
+            }
+        });
         
         fillPilotsData(rootView); 
         return rootView;
@@ -65,7 +91,7 @@ public class PilotsFragment extends Fragment {
     	TextView salary1 = (TextView) rootView.findViewById(R.id.salary1);
     	TextView moral1 = (TextView) rootView.findViewById(R.id.moral1);
     	TextView age1 = (TextView) rootView.findViewById(R.id.age1);
-    	TextView skill1 = (TextView) rootView.findViewById(R.id.skill1);
+    	skill1 = (TextView) rootView.findViewById(R.id.skill1);
 
     	InputStream is = null;    	
     	try {
@@ -76,7 +102,7 @@ public class PilotsFragment extends Fragment {
 		}   
     	
     	pilotPic1.setImageBitmap(BitmapFactory.decodeStream(is));
-    	Log.w("Pilot", playerTeam.toString());
+    	//Log.w("Pilot", playerTeam.toString());
     	nameText.setText(cars.get(0).getDriver().getName().toString());
        	target = "Season Points: " + String.valueOf(cars.get(0).getDriver().getSeasonPoints());
     	points1.setText(target);    	 
@@ -103,7 +129,7 @@ public class PilotsFragment extends Fragment {
     	TextView salary2 = (TextView) rootView.findViewById(R.id.salary2);
     	TextView moral2 = (TextView) rootView.findViewById(R.id.moral2);
     	TextView age2 = (TextView) rootView.findViewById(R.id.age2);
-    	TextView skill2 = (TextView) rootView.findViewById(R.id.skill2);
+    	skill2 = (TextView) rootView.findViewById(R.id.skill2);
     	
     	
     	try {
@@ -127,6 +153,10 @@ public class PilotsFragment extends Fragment {
     	age2.setText(target);
     	target = "Overall Skill: " +String.valueOf(cars.get(1).getDriver().getSkill());
     	skill2.setText(target);
+    	
+    	fundsText =  (TextView) rootView.findViewById(R.id.balancePilots);
+    	fundsText.setText("Balance: "+String.valueOf(playerTeam.getFunds()));
+    	
     }
     
     public void gotoMarketScreen(View view){
@@ -134,6 +164,37 @@ public class PilotsFragment extends Fragment {
     	
     	//Intent intent = new Intent(view.getContext(),SelectTeamActivity.class);
 		//getActivity().startActivity(intent);
+	}
+    
+    private void popAlertTrainPilot(View v, final int pilotNumber) {
+    	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    	final int costToUpgrade = playerTeam.getCars().get(pilotNumber).getDriver().costToUpgrade();
+    	// Add the buttons
+    	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    	           public void onClick(DialogInterface dialog, int id) {
+    	               if (playerTeam.getFunds() >= costToUpgrade){
+	    	        	   playerTeam.setFunds(playerTeam.getFunds()-costToUpgrade);	    	        	   
+	    	        	   playerTeam.getCars().get(pilotNumber).getDriver().setSkill(playerTeam.getCars().get(pilotNumber).getDriver().getSkill()+1);
+	    	        	   skill1.setText(SKILL_MESSAGE+String.valueOf((int)playerTeam.getCars().get(0).getDriver().getSkill()));	    	        	   
+	    	        	   skill2.setText(SKILL_MESSAGE+String.valueOf((int)playerTeam.getCars().get(1).getDriver().getSkill()));	        		   
+	    	        	   fundsText.setText("Balance: "+playerTeam.getFunds());
+	    	        	   playerTeam.getFinances().setImprovementExpense(playerTeam.getFinances().getImprovementExpense()+costToUpgrade);
+    	               }else{
+    	            	   Toast.makeText(getView().getContext(), "Not enough funds!", Toast.LENGTH_LONG).show();
+    	               }
+    	               trainPilot1.setEnabled(!playerTeam.getCars().get(pilotNumber).getDriver().isMaxLevel());    	               
+    	           }
+    	       });
+    	builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    	           public void onClick(DialogInterface dialog, int id) {
+    	               // User cancelled the dialog
+    	           }
+    	       });
+
+    	// Create the AlertDialog
+    	AlertDialog dialog = builder.create();
+    	dialog.setTitle("Train "+playerTeam.getCars().get(pilotNumber).getDriver().getName() + "? Cost: "+costToUpgrade);
+    	dialog.show();		
 	}
  
 }

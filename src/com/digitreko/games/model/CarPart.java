@@ -1,10 +1,17 @@
 package com.digitreko.games.model;
 
-import java.lang.reflect.Modifier;
+import java.io.Serializable;
 
-public abstract class CarPart {
 
-	private static final int MAXCONDITION = 100;
+public abstract class CarPart implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7476552229164043210L;
+	
+	private static final double MAXCONDITION = 100;
+	private static final int MAXLEVEL = 10;
 	private static final int INITIAL_COST = 100000;
 	private static final double PRICE_MODIFIER = 1.3;
 	private String brand;
@@ -13,7 +20,8 @@ public abstract class CarPart {
 
 	public CarPart(int power){
 		brand = "new";
-		condition = 100.0;
+		condition = 80;	//655000
+		condition = 50;	//655000
 		this.power = power;
 	}
 
@@ -42,8 +50,24 @@ public abstract class CarPart {
 	}
 	
 	
-	public int costToRepair(){
-		return (((int)condition - MAXCONDITION)*(power*10000));
+	public static double getMaxcondition() {
+		return MAXCONDITION;
+	}
+
+	public static int getInitialCost() {
+		return INITIAL_COST;
+	}
+
+	public static double getPriceModifier() {
+		return PRICE_MODIFIER;
+	}
+
+	public void setCondition(double condition) {
+		this.condition = condition;
+	}
+
+	public int costToRepair(){		
+		return (int) Math.round( ( ((MAXCONDITION - condition)*PRICE_MODIFIER) * (power*2500)));
 	}
 	
 	public int costToUpgrade(){
@@ -66,10 +90,25 @@ public abstract class CarPart {
 			return true;
 	}
 
+	public boolean isMaxLevel(){
+		if (power < MAXLEVEL)
+			return false;
+		else
+			return true;
+	}
+	public boolean isMaxCondition(){
+		if (condition < MAXCONDITION)
+			return false;
+		else
+			return true;
+	}
+
 	@Override
 	public String toString() {
 		return "CarPart [brand=" + brand + ", condition=" + condition
 				+ ", power=" + power + "]";
 	}
+	
+	
 	
 }

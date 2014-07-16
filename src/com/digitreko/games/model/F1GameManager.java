@@ -1,30 +1,31 @@
 package com.digitreko.games.model;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import android.util.Log;
 
-public class F1GameManager {
+public class F1GameManager implements Serializable {
 
+	
 	final int RACE_LAPS = 5;
 	final int QUALIFY_LAPS = 2; 	
 
-	ArrayList<Team> teams;
-	Team PCTeam;			//this will be the team picked by the player or current controlled by PC,
+	private ArrayList<Team> teams;
+	private Team PCTeam;			//this will be the team picked by the player or current controlled by PC,
 	//tells the system to build default UI with this team and AI ignores this one
 	private int gameMode;	
 	private  boolean isRace;	//isRace true uses RACE_LAPS, false uses QUALIFY_LAPS
-	private  Track actualRace;
-	private List<Standing> standings; 
-	private  List<Track> tracks;
+	private  Track actualRace;	
 	private  RaceSettings settings;
-	private  int currentRace;
-	private  List<Sponsor> sponsors;
+	private  int currentRace;	
 	private static F1GameManager globalGameManager;
 	private Manager player;
+	private double interest;
 
 	/**
 	 * @param args
@@ -32,12 +33,12 @@ public class F1GameManager {
 	private F1GameManager(){
 
 		teams = new ArrayList<Team>();
-		standings = new ArrayList<Standing>();
 		settings = new RaceSettings(2,RaceSettings.HARD);
-		initializeAllTracks();
-		initializeSeason();		
-		initializeSponsors();
-		currentRace = 0;	}
+		//initializeAllTracks();
+		//initializeSeason();
+		initializeTeams();
+		currentRace = 1;
+		interest = 0;	}
 
 	public static F1GameManager getInstance(){
 		if (globalGameManager == null){
@@ -47,16 +48,20 @@ public class F1GameManager {
 	}
 
 
-	public void initializeAllTracks() {
-		tracks = new ArrayList<Track>();
-		Track pista = new Track("Melbourne, Australia",	//length,difficulty
+	public Track getTrack(int currentRace) throws Exception{
+		Track pista = null;
+		switch (currentRace){
+		
+		case 1:
+		pista = new Track("Melbourne, Australia",	//length,difficulty
 				"1Albert_Park_Melbourne_large.jpg",
 				(new int[]{5,2}),(new int[]{5,3}),
 				(new int[]{4,6}),(new int[]{6,5}),
 				(new int[]{3,9}),(new int[]{3,8}),
 				(new int[]{4,5}),(new int[]{4,4}),
 				(new int[]{3,1}),(new int[]{3,2}));
-		tracks.add(pista);
+		break;
+		case 2:
 		pista = new Track("Jackarta, Malaysia",
 				"1Albert_Park_Melbourne_large.jpg",
 				(new int[]{5,2}),(new int[]{5,2}),
@@ -64,7 +69,8 @@ public class F1GameManager {
 				(new int[]{3,2}),(new int[]{5,2}),
 				(new int[]{3,2}),(new int[]{3,3}),
 				(new int[]{3,6}),(new int[]{3,2}));
-		tracks.add(pista);		
+		break;
+		case 3:		
 		pista = new Track("Bharain, Bahrain",
 				"1Kuala_Lumpur_Malaysia_compact.jpg",
 				(new int[]{4,1}),(new int[]{2,3}),
@@ -72,7 +78,8 @@ public class F1GameManager {
 				(new int[]{2,5}),(new int[]{2,1}),
 				(new int[]{2,8}),(new int[]{2,4}),
 				(new int[]{2,1}),(new int[]{2,6}));
-		tracks.add(pista);
+		break;
+		case 4:
 		pista = new Track("China",
 				"1Shanghai_China_compact.jpg",
 				(new int[]{3,1}),(new int[]{4,8}),
@@ -80,7 +87,8 @@ public class F1GameManager {
 				(new int[]{2,2}),(new int[]{3,5}),
 				(new int[]{3,5}),(new int[]{2,3}),
 				(new int[]{4,1}),(new int[]{4,7}));
-		tracks.add(pista);
+		break;
+		case 5:
 		pista = new Track("Spain",
 				"1Catalunya_Spain_compact.jpg",
 				(new int[]{2,1}),(new int[]{2,6}),
@@ -88,7 +96,8 @@ public class F1GameManager {
 				(new int[]{2,2}),(new int[]{2,6}),
 				(new int[]{2,2}),(new int[]{2,2}),
 				(new int[]{2,2}),(new int[]{2,1}));
-		tracks.add(pista);
+		break;
+		case 6:
 		pista = new Track("Monaco",
 				"1Monte_Carlo_Monaco_compact.jpg",
 				(new int[]{2,2}),(new int[]{2,1}),
@@ -96,7 +105,8 @@ public class F1GameManager {
 				(new int[]{2,8}),(new int[]{2,7}),
 				(new int[]{2,2}),(new int[]{2,2}),
 				(new int[]{2,8}),(new int[]{2,5}));
-		tracks.add(pista);
+		break;
+		case 7:
 		pista = new Track("Canada",
 				"1Gilles_Villeneuve_Canada_compact.jpg",
 				(new int[]{2,5}),(new int[]{2,3}),
@@ -104,7 +114,8 @@ public class F1GameManager {
 				(new int[]{2,3}),(new int[]{2,1}),
 				(new int[]{2,9}),(new int[]{2,2}),
 				(new int[]{2,1}),(new int[]{2,5}));
-		tracks.add(pista);
+		break;
+		case 8:
 		pista = new Track("Austria",
 				"1Red_Bull_Ring_compact.jpg",
 				(new int[]{2,1}),(new int[]{2,4}),
@@ -112,7 +123,8 @@ public class F1GameManager {
 				(new int[]{2,7}),(new int[]{2,2}),
 				(new int[]{2,6}),(new int[]{2,7}),
 				(new int[]{2,6}),(new int[]{2,5}));
-		tracks.add(pista);
+		break;
+		case 9:
 		pista = new Track("Great Britain",
 				"1Silverstone_England_compact.jpg",
 				(new int[]{2,2}),(new int[]{2,6}),
@@ -120,7 +132,8 @@ public class F1GameManager {
 				(new int[]{2,2}),(new int[]{2,3}),
 				(new int[]{2,4}),(new int[]{2,1}),
 				(new int[]{2,2}),(new int[]{2,6}));
-		tracks.add(pista);
+		break;
+		case 10:
 		pista = new Track("Germany",
 				"1Hockenheimring_Germany_compact.jpg",
 				(new int[]{2,2}),(new int[]{2,5}),
@@ -128,7 +141,8 @@ public class F1GameManager {
 				(new int[]{2,3}),(new int[]{2,7}),
 				(new int[]{2,2}),(new int[]{2,5}),
 				(new int[]{2,5}),(new int[]{2,4}));
-		tracks.add(pista);
+		break;
+		case 11:
 		pista = new Track("Hungary",
 				"1Budapest_Hungary_compact.jpg",
 				(new int[]{2,1}),(new int[]{2,4}),
@@ -136,7 +150,8 @@ public class F1GameManager {
 				(new int[]{2,3}),(new int[]{2,5}),
 				(new int[]{2,5}),(new int[]{2,4}),
 				(new int[]{2,8}),(new int[]{2,6}));
-		tracks.add(pista);
+		break;
+		case 12:
 		pista = new Track("Belgium",
 				"1Spa-Francorchamps_Belgium_compact.jpg",
 				(new int[]{2,6}),(new int[]{2,2}),
@@ -144,7 +159,8 @@ public class F1GameManager {
 				(new int[]{2,7}),(new int[]{2,4}),
 				(new int[]{2,4}),(new int[]{2,4}),
 				(new int[]{2,3}),(new int[]{2,7}));
-		tracks.add(pista);
+		break;
+		case 13:
 		pista = new Track("Italia",
 				"1Monza_Italy_-_Copy_compact.jpg",
 				(new int[]{2,1}),(new int[]{2,7}),
@@ -152,7 +168,8 @@ public class F1GameManager {
 				(new int[]{2,3}),(new int[]{2,3}),
 				(new int[]{2,1}),(new int[]{2,3}),
 				(new int[]{2,1}),(new int[]{2,4}));
-		tracks.add(pista);
+		break;
+		case 14:
 		pista = new Track("Singapore",
 				"1Marina_Bay_Singapore_compact.jpg",
 				(new int[]{2,8}),(new int[]{2,3}),
@@ -160,7 +177,8 @@ public class F1GameManager {
 				(new int[]{2,6}),(new int[]{2,7}),
 				(new int[]{2,5}),(new int[]{2,4}),
 				(new int[]{2,4}),(new int[]{2,3}));
-		tracks.add(pista);		
+		break;
+		case 15:		
 		pista = new Track("Japan",
 				"1Suzuka_Japan_compact.jpg",
 				(new int[]{2,3}),(new int[]{2,4}),
@@ -168,7 +186,8 @@ public class F1GameManager {
 				(new int[]{2,9}),(new int[]{2,7}),
 				(new int[]{2,8}),(new int[]{2,4}),
 				(new int[]{2,7}),(new int[]{2,3}));
-		tracks.add(pista);
+		break;
+		case 16:
 		pista = new Track("Russia",
 				"1sochi.png",		//attention here, artifacts incoming
 				(new int[]{2,3}),(new int[]{2,5}),
@@ -176,7 +195,8 @@ public class F1GameManager {
 				(new int[]{2,7}),(new int[]{2,7}),
 				(new int[]{2,3}),(new int[]{2,8}),
 				(new int[]{2,5}),(new int[]{2,5}));
-		tracks.add(pista);		
+		break;
+		case 17:		
 		pista = new Track("United States",
 				"1Circuit Americas_Austin.jpg",
 				(new int[]{2,3}),(new int[]{2,3}),
@@ -184,7 +204,8 @@ public class F1GameManager {
 				(new int[]{2,9}),(new int[]{2,1}),
 				(new int[]{2,8}),(new int[]{2,7}),
 				(new int[]{2,7}),(new int[]{2,6}));
-		tracks.add(pista);
+		break;
+		case 18:
 		pista = new Track("Brazil",
 				"1Sao_Paulo_Brazil_compact.jpg",
 				(new int[]{2,3}),(new int[]{2,2}),
@@ -192,7 +213,8 @@ public class F1GameManager {
 				(new int[]{2,2}),(new int[]{2,4}),
 				(new int[]{2,7}),(new int[]{2,8}),
 				(new int[]{2,8}),(new int[]{2,5}));
-		tracks.add(pista);
+		break;
+		case 19:
 		pista = new Track("United Arab Emirates",
 				"1Yas_Marina_Abu_Dhabi_compact.jpg",
 				(new int[]{2,6}),(new int[]{2,5}),
@@ -200,41 +222,17 @@ public class F1GameManager {
 				(new int[]{2,2}),(new int[]{2,5}),
 				(new int[]{2,3}),(new int[]{2,6}),
 				(new int[]{2,7}),(new int[]{2,7}));
-		tracks.add(pista);
+		break;
+		default:
+			throw new Exception("Invalid track index.");
+		}
+		return pista;
 	}
 
 	private   void initializeSeason() {		
-		actualRace = tracks.get(currentRace);
+		//actualRace = tracks.get(currentRace);		
 	}
-
-	private   void simulateSeason(){
-		while (currentRace < tracks.size())
-		{
-			//preRaceSettings();
-			System.out.println("\nGp de "+tracks.get(currentRace).getCityAndCountry());
-			simulateRace();
-
-		}
-		showSeasonResults();
-	}
-
-	private   void preRaceSettings() {
-		System.out.println("Repair?");
-		System.out.println("Race?");
-
-	}
-
-
-	private   void showSeasonResults() {
-		for (Pilot p: getAllPilots("points")){
-			System.out.println(p.getName()+" fez "+ p.getSeasonPoints()+" na temporada.");
-		}
-		for (Team team: teams){
-			System.out.println(team.getName()+" tem "+team.getSeasonPoints()+" pontos na temporada.");
-		}
-	}
-
-
+	
 	private void simulateRace() {		
 		for (int volta = 0;volta < RACE_LAPS;volta++){
 			System.out.println("\nVOLTA "+(volta+1));
@@ -318,6 +316,12 @@ public class F1GameManager {
 		}
 		return pilots;
 	}
+	
+	public int getPlayerTeamPosition(){		
+		Collections.sort(teams,new Team.ConstructorPointsComparator());
+		Team pct = getPCTeam();		
+		return teams.lastIndexOf(pct);
+	}
 
 	//working
 	private   void clearPastOutcome() {		
@@ -333,7 +337,7 @@ public class F1GameManager {
 		}
 	}
 
-	public void initializeTeams(String selectedTeam) throws Exception {		
+	public void initializeTeams(){		
 		//case t0 decide which team was selected
 		//in case of custom create team with data and add to array
 		Team redBullRacing = new Team(Codes.teamAndCarCodes.RBR1);
@@ -347,57 +351,6 @@ public class F1GameManager {
 		Team toroRosso =  new Team(Codes.teamAndCarCodes.TOR1);
 		Team caterhan =  new Team(Codes.teamAndCarCodes.CAT1);
 		Team marussia =  new Team(Codes.teamAndCarCodes.MAR1);
-
-		if (selectedTeam.equals("Ferrari")){
-			ferrari.setPlayerControlled(true);
-			//ferrari.setToLowestValues();
-		}
-		else
-			if (selectedTeam.equals("Red Bull Racing")){
-				redBullRacing.setPlayerControlled(true);
-			}
-			else
-				if (selectedTeam.equals("Williams")){
-					willians.setPlayerControlled(true);
-				}
-				else
-					if (selectedTeam.equals("Sauber")){
-						sauber.setPlayerControlled(true);
-					}
-					else
-						if (selectedTeam.equals("McLaren")){
-							mcLaren.setPlayerControlled(true);
-						}
-						else
-							if (selectedTeam.equals("Force India")){
-								forceIndia.setPlayerControlled(true);
-							}
-							else
-								if (selectedTeam.equals("Marussia")){
-									marussia.setPlayerControlled(true);
-								}
-								else
-									if (selectedTeam.equals("Catherham")){
-										caterhan.setPlayerControlled(true);
-									}
-									else
-										if (selectedTeam.equals("Lotus")){
-											lotus.setPlayerControlled(true);
-										}
-										else
-											if (selectedTeam.equals("Mercedes")){
-												mercedes.setPlayerControlled(true);
-											}
-											else
-												if (selectedTeam.equals("Toro Rosso")){
-													toroRosso.setPlayerControlled(true);
-												}
-												else
-												{
-													throw new Exception("Player is not controlling any team!!");
-												}
-
-		
 		
 		
 		//teams.add(customTeam);
@@ -412,11 +365,19 @@ public class F1GameManager {
 		teams.add(willians);
 		teams.add(toroRosso);
 		teams.add(marussia);
-
-		//printInfoAboutAllTeams();
-		setToLowestValuesStartGame(sponsors.get(0));
+		
 	}
 	
+	public void setPlayerControlledTeam(String selectedTeam){
+		System.out.println("Team: "+selectedTeam);
+		for (Team t: teams){
+			if (t.getName().equals(selectedTeam)){
+				t.setPlayerControlled(true);
+			}
+		}
+		setToLowestValuesStartGame(getSponsor(0));
+	}
+
 	private void printInfoAboutAllTeams(){
 		for (Team t: teams){
 			Log.w("TeamInfo",t.toString());
@@ -427,18 +388,19 @@ public class F1GameManager {
 		getPCTeam().setToLowestValues(sponsor);		
 	}
 	
-	private void initializeSponsors(){
-		sponsors = new ArrayList<Sponsor>();
-		Sponsor s = new Sponsor("HP",300000,1);
-		sponsors.add(s);
-		s = new Sponsor("Microsoft",500000,2);
-		sponsors.add(s);
-		s = new Sponsor("IBM",600000,4);
-		sponsors.add(s);
-		s = new Sponsor("MegaPetro",700000,8);
-		sponsors.add(s);
-		s = new Sponsor("Osama Holdings",1000000,10);
-		sponsors.add(s);		
+	private Sponsor getSponsor(int level){
+		Sponsor s = null;
+		if (level == 0)
+			s = new Sponsor("HP",300000,1);
+		if (level == 1)
+			s = new Sponsor("Microsoft",500000,2);
+		if (level == 2)
+			s = new Sponsor("IBM",600000,4);
+		if (level == 3)
+			s = new Sponsor("MegaPetro",700000,8);
+		if (level == 4)
+			s = new Sponsor("Osama Holdings",1000000,10);
+		return s;		
 	}
 
 
@@ -497,26 +459,6 @@ public class F1GameManager {
 	}
 
 
-	public   List<Standing> getStandings() {
-		return standings;
-	}
-
-
-	public   void setStandings(List<Standing> standings) {
-		this.standings = standings;
-	}
-
-
-	public   List<Track> getTracks() {
-		return tracks;
-	}
-
-
-	public   void setTracks(List<Track> tracks) {
-		this.tracks = tracks;
-	}
-
-
 	public   RaceSettings getSettings() {
 		return settings;
 	}
@@ -536,17 +478,6 @@ public class F1GameManager {
 		this.currentRace = currentRace;
 	}
 
-
-	public   List<Sponsor> getSponsors() {
-		return sponsors;
-	}
-
-
-	public   void setSponsors(List<Sponsor> sponsors) {
-		this.sponsors = sponsors;
-	}
-
-
 	public   int getRaceLaps() {
 		return RACE_LAPS;
 	}
@@ -563,6 +494,11 @@ public class F1GameManager {
 	public void setPlayer(Manager player) {
 		this.player = player;
 	}
-
-
+	
+	public double generateInterest(){
+		//this method will generate round interest based in a lot of factors
+		//refer to design manual
+		return 10;
+	}
+	
 }

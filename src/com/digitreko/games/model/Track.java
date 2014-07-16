@@ -1,10 +1,14 @@
 package com.digitreko.games.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Track {
+public class Track implements Serializable{	
 	
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4656849931721893191L;
 	private String name;
 	private String cityAndCountry;
 	private double lenght;

@@ -1,6 +1,13 @@
 package com.digitreko.games.model;
 
-public class Sponsor {
+import java.io.Serializable;
+
+public class Sponsor implements Serializable
+{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -86572127970327049L;
 	private String name;
 	private int yearValue;
 	private int level;		//level determines the how big you must be to draw attention from this sponsor
@@ -43,6 +50,12 @@ public class Sponsor {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Sponsor [name=" + name + ", yearValue=" + yearValue
+				+ ", level=" + level + "]";
+	}
 	
 }
-

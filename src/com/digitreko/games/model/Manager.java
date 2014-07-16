@@ -1,6 +1,13 @@
 package com.digitreko.games.model;
 
-public class Manager {
+import java.io.Serializable;
+
+public class Manager implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -722048577435286148L;
 	private String name;
 	private String nationality;
 	private int age;
@@ -39,6 +46,13 @@ public class Manager {
 	public void setYearsInCommand(int yearsInCommand) {
 		this.yearsInCommand = yearsInCommand;
 	}
+
+	@Override
+	public String toString() {
+		return "Manager [name=" + name + ", nationality=" + nationality
+				+ ", age=" + age + ", yearsInCommand=" + yearsInCommand + "]";
+	}
+	
 	
 	
 }

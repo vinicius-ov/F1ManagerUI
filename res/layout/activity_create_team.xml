@@ -48,8 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_alignParentRight="true"
         android:onClick="gotoConfirmStartGame"
         android:text="@string/button_next" />
 

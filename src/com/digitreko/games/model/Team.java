@@ -1,19 +1,29 @@
 package com.digitreko.games.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 
 //car-to-team codes are in the spreadsheet 
-public class Team {
+public class Team implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final int MAX_PILOTS = 4;
 	private final int MAX_COLORS = 2;
 	private final int INITIAL_VALUE_NEW_GAME = 1;
 	private final int INITIAL_PILOT_SKILL = 50;
-	private final int INITIAL_FUNDS_PLAYER_CONTROLLED = 3000000;	//TODO:need to define values to balance gameplay
+	private final int INITIAL_FUNDS_PLAYER_CONTROLLED = 5000000;	//TODO:need to define values to balance gameplay 300k
 	private final int INITIAL_FUNDS_AI_CONTROLLED = 10000000;
-
+	private final int INITIAL_COST = 100000;
+	private final double PRICE_MODIFIER = 1.2;
+	private final double MAX_UPGRADE = 10;	
+	private final int MOCK_POINTS = 22;
+	
 	private String name;			//name of team
 	private List<String> colors;
 	private List<RaceCar> cars;
@@ -26,7 +36,9 @@ public class Team {
 	private int funds;
 	private List<Sponsor> sponsors;
 	private boolean playerControlled;
-
+	private Finances finances;
+	private int loans;		//all cash borrowed so far, will have a limit?
+	
 	public Team (){
 	
 	}
@@ -46,6 +58,7 @@ public class Team {
 		cars = new ArrayList<RaceCar>();
 		playerControlled = false;
 		funds = INITIAL_FUNDS_AI_CONTROLLED;
+		finances = new Finances();
 		
 		switch (code){
 		case RBR1:{
@@ -89,8 +102,6 @@ public class Team {
 			colors.add("Black");
 			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Alonso)));
 			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Raikkonen)));
-			
-				
 		}
 		break;
 		case LOT1:{
@@ -319,6 +330,27 @@ public class Team {
 		return  cars.get(0).getDriver().getSeasonPoints() + cars.get(1).getDriver().getSeasonPoints();
 		
 	}
+	
+	public int getrAndD() {
+		return rAndD;
+	}
+	
+	public Finances getFinances() {
+		return finances;
+	}
+
+	public void setFinances(Finances finances) {
+		this.finances = finances;
+	}
+	
+
+	public int getLoans() {
+		return loans;
+	}
+
+	public void setLoans(int loans) {
+		this.loans = loans;
+	}
 
 	@Override
 	public int hashCode() {
@@ -343,73 +375,26 @@ public class Team {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Team other = (Team) obj;
-		if (INITIAL_VALUE_NEW_GAME != other.INITIAL_VALUE_NEW_GAME)
-			return false;
-		if (MAX_COLORS != other.MAX_COLORS)
-			return false;
-		if (MAX_PILOTS != other.MAX_PILOTS)
-			return false;
-		if (cars == null) {
-			if (other.cars != null)
-				return false;
-		} else if (!cars.equals(other.cars))
-			return false;
-		if (colors == null) {
-			if (other.colors != null)
-				return false;
-		} else if (!colors.equals(other.colors))
-			return false;
-		if (engine == null) {
-			if (other.engine != null)
-				return false;
-		} else if (!engine.equals(other.engine))
-			return false;
-		if (engineers != other.engineers)
-			return false;
-		if (fanCount != other.fanCount)
-			return false;
-		if (funds != other.funds)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (planners != other.planners)
-			return false;
-		if (playerControlled != other.playerControlled)
-			return false;
-		if (rAndD != other.rAndD)
-			return false;
-		if (reputation != other.reputation)
-			return false;
-		if (sponsors == null) {
-			if (other.sponsors != null)
-				return false;
-		} else if (!sponsors.equals(other.sponsors))
-			return false;
-		return true;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "Team [MAX_PILOTS=" + MAX_PILOTS + ", MAX_COLORS=" + MAX_COLORS
 				+ ", INITIAL_VALUE_NEW_GAME=" + INITIAL_VALUE_NEW_GAME
-				+ ", name=" + name + ", colors=" + colors + ", cars=" + cars
-				+ ", engine=" + engine + ", engineers=" + engineers
-				+ ", planners=" + planners + ", rAndD=" + rAndD + ", fanCount="
-				+ fanCount + ", reputation=" + reputation + ", funds=" + funds
-				+ ", sponsors=" + sponsors + ", playerControlled="
-				+ playerControlled + "]";
+				+ ", INITIAL_PILOT_SKILL=" + INITIAL_PILOT_SKILL
+				+ ", INITIAL_FUNDS_PLAYER_CONTROLLED="
+				+ INITIAL_FUNDS_PLAYER_CONTROLLED
+				+ ", INITIAL_FUNDS_AI_CONTROLLED="
+				+ INITIAL_FUNDS_AI_CONTROLLED + ", INITIAL_COST="
+				+ INITIAL_COST + ", PRICE_MODIFIER=" + PRICE_MODIFIER
+				+ ", MAX_UPGRADE=" + MAX_UPGRADE + ", MOCK_POINTS="
+				+ MOCK_POINTS + ", name=" + name + ", colors=" + colors
+				+ ", cars=" + cars + ", engine=" + engine + ", engineers="
+				+ engineers + ", planners=" + planners + ", rAndD=" + rAndD
+				+ ", fanCount=" + fanCount + ", reputation=" + reputation
+				+ ", funds=" + funds + ", sponsors=" + sponsors
+				+ ", playerControlled=" + playerControlled + ", finances="
+				+ finances + ", loans=" + loans + "]";
 	}
 
 	public void showPilotStandingInLap(Team currTeam) {
@@ -441,7 +426,7 @@ public class Team {
 		engineers = INITIAL_VALUE_NEW_GAME;
 		rAndD = INITIAL_VALUE_NEW_GAME;
 		planners = INITIAL_VALUE_NEW_GAME;
-		funds = INITIAL_FUNDS_PLAYER_CONTROLLED;
+		funds = INITIAL_FUNDS_PLAYER_CONTROLLED;		
 		for (RaceCar car: cars){
 			car.getBrakes().setPower(INITIAL_VALUE_NEW_GAME);
 			car.getSuspension().setPower(INITIAL_VALUE_NEW_GAME);
@@ -450,6 +435,8 @@ public class Team {
 			car.getAerodynamics().setPower(INITIAL_VALUE_NEW_GAME);
 			car.getDriver().setSkill(INITIAL_PILOT_SKILL);
 			car.getDriver().createSalary();
+			//remove this line after debug
+			car.getDriver().setSeasonPoints(MOCK_POINTS);
 		}		
 		getSponsors().add(sponsor);
 	}
@@ -457,16 +444,74 @@ public class Team {
 		int expenses = 0;
 		for (RaceCar c:cars){
 			expenses += c.getDriver().getCurrentSalary();
-		}
+		}		
 		return expenses;
 	}
-	public int getProjectedBalance(){
-		
-			return funds - teamExpenses() + getSponsors().get(0).getYearValue() /*team Sponsors */;
-		
-	//		return funds - teamExpenses() + 10;
-	
-
+	public int getProjectedBalance(){		
+		return funds - teamExpenses() + getSponsorsIncome(); /*team Sponsors */
 	}
+	
+	public int getUpgradeEngineerCost() {
+		if (engineers < 2){		
+			return INITIAL_COST * engineers;
+		}else{
+			return (int)((double)INITIAL_COST * (double)engineers * PRICE_MODIFIER);
+		}
+	}
+
+	public int getUpgradePlannerCost() {
+		if (planners < 2){		
+			return INITIAL_COST * planners;
+		}else{
+			return (int)((double)INITIAL_COST * (double)planners * PRICE_MODIFIER);
+		}
+	}
+
+	public boolean isPlannersMaxLevel() {
+		if (planners < MAX_UPGRADE)
+			return false;
+			else return true;
+	}
+
+	public boolean isEngineersMaxLevel() {
+		if (engineers < MAX_UPGRADE)
+			return false;
+			else return true;
+	}
+
+	public int getUpgradeRandDCost() {
+		if (rAndD < 2){		
+			return INITIAL_COST * rAndD;
+		}else{
+			return (int)((double)INITIAL_COST * (double)rAndD * PRICE_MODIFIER);
+		}
+	}
+
+	public boolean isRandDMaxLevel() {
+		if (rAndD < MAX_UPGRADE)
+			return false;
+			else return true;
+	}
+	
+	public int getPilotsExpense(){
+		return cars.get(0).getDriver().getCurrentSalary()+cars.get(1).getDriver().getCurrentSalary(); 
+	}
+
+	public int getSponsorsIncome() {
+		int income = 0;
+		for (Sponsor s: sponsors){
+			income += s.getYearValue();
+		}
+		return income;
+	}
+	
+	public static class ConstructorPointsComparator implements Comparator<Team>{
+
+		@Override
+		public int compare(Team arg0, Team arg1) {
+			return arg1.getSeasonPoints() - arg0.getSeasonPoints();
+		}		
+	}
+
 }
 

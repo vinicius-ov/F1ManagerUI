@@ -1,8 +1,14 @@
 package com.digitreko.games.model;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class RaceCar{
+public class RaceCar implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5531703814378307309L;
 
 	static final int CATERHAN 		= 3;
 	static final int MARUSSIA 		= 3;
@@ -78,7 +84,7 @@ public class RaceCar{
 		engine = new Engine(value);
 		suspension = new Suspension(value);
 		tires = new Tires(value);
-		breaks		= new Breaks(value);
+		breaks		= new Brakes(value);
 		//chassi		= value;		
 		currentSection = 0;
 		sectionStatus = false;
@@ -186,6 +192,7 @@ public class RaceCar{
 		this.tires = tires;
 	}
 
+	
 	
 	@Override
 	public String toString() {

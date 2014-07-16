@@ -1,13 +1,26 @@
 package com.digitreko.ui.f1managerui;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
+import com.digitreko.games.model.F1GameManager;
+import com.digitreko.games.model.Manager;
+import com.digitreko.games.model.Team;
 import com.digitreko.ui.auxiliar.TabsPagerAdapter;
 import com.example.f1managerui.R;
  
@@ -81,8 +94,87 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
     	
     }
     
+    @Override
+	public void onStop()
+	{
+    	//recover code goes here
+    	FileOutputStream fos;
+    	Manager m = F1GameManager.getInstance().getPlayer();
+    	Team t = F1GameManager.getInstance().getPCTeam();
 
+		try {
+			fos = getApplicationContext().openFileOutput("save.sav", Context.MODE_PRIVATE);			
+			ObjectOutputStream os = new ObjectOutputStream(fos);
+	    	os.writeObject(t);
+	    	os.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+    	//recover code stops here    	
+    	
+    	System.out.println("STOP base");
+    	super.onStop();	
+	}
 
+    @Override
+	public void onPause()
+	{
+    	System.out.println("PAUSE base");
+    	super.onPause();
+		
+	}
+
+    @Override
+    public void onResume(){
+    	System.out.print("RESUME");
+		System.out.println("base");
+    	
+		//here starts recover code		
+		FileInputStream fis;
+		Team simpleClass = null; 
+		try {
+			fis = getApplicationContext().openFileInput("save.sav");
+			ObjectInputStream is = new ObjectInputStream(fis);
+			simpleClass = (Team) is.readObject();
+			is.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (StreamCorruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			System.out.println("Manager: "+simpleClass.toString());
+		} catch (NullPointerException e) {
+			System.out.println("Nada para mostrar...");
+		}
+		
+		
+		//here stops recover code
+		super.onResume();
+    	
+    }
+    
+    @Override
+    public void onRestart(){
+    	System.out.print("RESTART");
+    	System.out.println("base");
+    	super.onRestart();    	
+    }
  
 }
 
@@ -157,4 +249,57 @@ public class BaseNavigationSpinnerActivity extends Activity implements ActionBar
         return true;
     }
 }
+
+ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
+    	//File file = new File(Activity., "save.sav");
+    	FileOutputStream fos = null;
+    	try {
+			fos = openFileOutput("save.sav", Context.MODE_PRIVATE);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	Team o = F1GameManager.getInstance().getPCTeam();
+    	System.out.println(o.toString());
+    	//TODO: must save this byte array to a file and recover
+    	byte[] buf = null;
+        try { 
+          ObjectOutput out = new ObjectOutputStream(bos); 
+          out.writeObject(o); 
+          out.close(); 
+     
+          // Get the bytes of the serialized object 
+          buf = bos.toByteArray();  
+          System.out.println(buf.length);
+          fos.write(buf);  
+        } catch(IOException ioe) { 
+          System.out.println("serializeObject " + "error " + ioe.getMessage());
+        }
+        FileInputStream fis = null;
+        byte[] buff =null;
+        try {
+			fis = openFileInput("save.sav");
+			fis.read(buff);
+			System.out.println(buf.toString());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        Object object = null;
+        try { 
+            ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff)); 
+            object = in.readObject(); 
+            in.close();           
+        
+          } catch(ClassNotFoundException cnfe) { 
+          } catch(IOException ioe) {
+          } 
+        
+        Team m = (Team) object;
+        System.out.println(m.toString());
+        
 */

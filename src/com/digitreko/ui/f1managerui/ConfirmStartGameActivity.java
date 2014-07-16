@@ -102,17 +102,37 @@ public class ConfirmStartGameActivity extends Activity {
 		getMenuInflater().inflate(R.menu.confirm_start_game, menu);
 		return true;
 	}
+	
+	@Override
+	public void onStop()
+	{
+		System.out.println("STOP confirm");
+		super.onStop();		
+	}
+	@Override
+	public void onPause()
+	{
+		System.out.println("PAUSE confirm");
+		super.onPause();		
+	}
+	@Override
+    public void onResume(){
+    	System.out.print("RESUME");
+		System.out.println("confirm");
+    	super.onResume();
+    }
+    
+    @Override
+    public void onRestart(){
+    	System.out.print("RESTART");
+    	System.out.println("confirm");
+    	super.onRestart();    	
+    }
 
 	public void gotoStartGame(View view){
-    	godClass.initializeAllTracks();    	
-    	try {
-			godClass.initializeTeams(selectedTeam);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+    	System.out.println("Team: "+selectedTeam);
+    	godClass.setPlayerControlledTeam(selectedTeam);
+
 		Intent intent = new Intent(this,BaseTabbedNavigationActivity.class);
 		startActivity(intent);
 	}

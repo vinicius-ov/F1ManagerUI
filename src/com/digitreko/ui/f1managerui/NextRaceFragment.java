@@ -36,9 +36,15 @@ public class NextRaceFragment extends Fragment {
     private void fillFields(View rootView){
     	final F1GameManager godClass;
     	godClass = F1GameManager.getInstance();
-    	List<Track> tracks = godClass.getTracks();
+    	//List<Track> tracks = godClass.getTracks();
     	int num = godClass.getCurrentRace();
-    	Track tr = tracks.get(num);
+    	Track tr = null;
+		try {
+			tr = godClass.getTrack(num);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     	
     	InputStream is = null;
     	try {

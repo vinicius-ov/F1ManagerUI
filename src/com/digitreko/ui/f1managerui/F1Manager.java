@@ -38,4 +38,31 @@ public class F1Manager extends Activity {
 		System.out.println("App terminated by user via main menu!");
 		super.finish();
 	}
+	
+	@Override
+	public void onPause()
+	{
+		System.out.println("PAUSE main");
+		super.onPause();
+		
+	}
+	@Override
+	public void onStop()
+	{
+		System.out.println("STOP main");
+		super.onStop();		
+	}
+	@Override
+    public void onResume(){
+    	System.out.print("RESUME");
+		System.out.println("main");
+    	super.onResume();
+    }
+    
+    @Override
+    public void onRestart(){
+    	System.out.print("RESTART");
+    	System.out.println("main");
+    	super.onRestart();    	
+    }
 }

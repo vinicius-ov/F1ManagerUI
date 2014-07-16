@@ -160,21 +160,30 @@
         android:text="Age: 50" />
 
     <Button
-        android:id="@+id/trainPilot2"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/salary1"
-        android:layout_alignTop="@+id/skill2"
-        android:text="Train Pilot" />
-
-    <Button
         android:id="@+id/trainPilot1"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/skill1"
-        android:layout_toRightOf="@+id/moral2"
         android:text="Train Pilot" />
+
+    <Button
+        android:id="@+id/trainPilot2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/skill2"
+        android:text="Train Pilot" />
+
+    <TextView
+        android:id="@+id/balancePilots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Balance: 1000000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
