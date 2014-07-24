@@ -1,11 +1,14 @@
 package com.digitreko.games.model;
 
 import java.io.IOException;
+
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
 
 import android.util.Log;
 
@@ -27,6 +30,7 @@ public class F1GameManager implements Serializable {
 	private Manager player;
 	private double interest;
 
+
 	/**
 	 * @param args
 	 */
@@ -34,11 +38,13 @@ public class F1GameManager implements Serializable {
 
 		teams = new ArrayList<Team>();
 		settings = new RaceSettings(2,RaceSettings.HARD);
+
 		//initializeAllTracks();
 		//initializeSeason();
 		initializeTeams();
 		currentRace = 1;
 		interest = 0;	}
+
 
 	public static F1GameManager getInstance(){
 		if (globalGameManager == null){
@@ -48,6 +54,7 @@ public class F1GameManager implements Serializable {
 	}
 
 
+
 	public Track getTrack(int currentRace) throws Exception{
 		Track pista = null;
 		switch (currentRace){
@@ -55,24 +62,29 @@ public class F1GameManager implements Serializable {
 		case 1:
 		pista = new Track("Melbourne, Australia",	//length,difficulty
 				"1Albert_Park_Melbourne_large.jpg",
+
 				(new int[]{5,2}),(new int[]{5,3}),
 				(new int[]{4,6}),(new int[]{6,5}),
 				(new int[]{3,9}),(new int[]{3,8}),
 				(new int[]{4,5}),(new int[]{4,4}),
 				(new int[]{3,1}),(new int[]{3,2}));
+
 		break;
 		case 2:
 		pista = new Track("Jackarta, Malaysia",
 				"1Albert_Park_Melbourne_large.jpg",
+
 				(new int[]{5,2}),(new int[]{5,2}),
 				(new int[]{4,2}),(new int[]{3,1}),
 				(new int[]{3,2}),(new int[]{5,2}),
 				(new int[]{3,2}),(new int[]{3,3}),
 				(new int[]{3,6}),(new int[]{3,2}));
+
 		break;
 		case 3:		
 		pista = new Track("Bharain, Bahrain",
 				"1Kuala_Lumpur_Malaysia_compact.jpg",
+
 				(new int[]{4,1}),(new int[]{2,3}),
 				(new int[]{2,1}),(new int[]{2,3}),
 				(new int[]{2,5}),(new int[]{2,1}),
@@ -222,17 +234,21 @@ public class F1GameManager implements Serializable {
 				(new int[]{2,2}),(new int[]{2,5}),
 				(new int[]{2,3}),(new int[]{2,6}),
 				(new int[]{2,7}),(new int[]{2,7}));
+
 		break;
 		default:
 			throw new Exception("Invalid track index.");
+
 		}
 		return pista;
 	}
+
 
 	private   void initializeSeason() {		
 		//actualRace = tracks.get(currentRace);		
 	}
 	
+
 	private void simulateRace() {		
 		for (int volta = 0;volta < RACE_LAPS;volta++){
 			System.out.println("\nVOLTA "+(volta+1));
@@ -337,7 +353,9 @@ public class F1GameManager implements Serializable {
 		}
 	}
 
+
 	public void initializeTeams(){		
+
 		//case t0 decide which team was selected
 		//in case of custom create team with data and add to array
 		Team redBullRacing = new Team(Codes.teamAndCarCodes.RBR1);
@@ -350,9 +368,11 @@ public class F1GameManager implements Serializable {
 		Team willians =  new Team(Codes.teamAndCarCodes.WIL1);
 		Team toroRosso =  new Team(Codes.teamAndCarCodes.TOR1);
 		Team caterhan =  new Team(Codes.teamAndCarCodes.CAT1);
+
 		Team marussia =  new Team(Codes.teamAndCarCodes.MAR1);
 		
 		
+
 		//teams.add(customTeam);
 		teams.add(caterhan);
 		teams.add(redBullRacing);
@@ -364,6 +384,7 @@ public class F1GameManager implements Serializable {
 		teams.add(forceIndia);
 		teams.add(willians);
 		teams.add(toroRosso);
+
 		teams.add(marussia);
 		
 	}
@@ -501,4 +522,5 @@ public class F1GameManager implements Serializable {
 		return 10;
 	}
 	
+
 }

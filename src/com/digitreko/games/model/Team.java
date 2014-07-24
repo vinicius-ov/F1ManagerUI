@@ -101,8 +101,7 @@ public class Team implements Serializable{
 			colors.add("Red");
 			colors.add("Black");
 			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Alonso)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Raikkonen)));
-		}
+			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Raikkonen)));		}
 		break;
 		case LOT1:{
 			name = "Lotus";

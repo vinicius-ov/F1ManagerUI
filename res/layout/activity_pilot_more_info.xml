@@ -14,7 +14,9 @@
         android:layout_height="128dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"/>
+        android:adjustViewBounds="true"
+        android:src="@drawable/photo" />
+
 
     <TextView
         android:id="@+id/pilotName1"

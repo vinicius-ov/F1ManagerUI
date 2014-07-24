@@ -26,7 +26,9 @@ public class Track implements Serializable{
 			int[] sec9,int[] sec10){
 	this.name = nome;
 	this.cityAndCountry = nome;
+
 	this.fileName = fileName;
+
 	lenght = 0;
 	sections =  new ArrayList<Section>();
 	sections.add(new Section(sec1));

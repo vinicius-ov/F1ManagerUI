@@ -44,7 +44,7 @@ public class Pilot implements Serializable{
             	name = "Sebastian Vettel";
             	skill = 80;
             	fileName = "vettel.png";
-            	
+
             }
             break;
             case Webber:{
@@ -116,7 +116,9 @@ public class Pilot implements Serializable{
             case Resta:{
             	name 	= "Paul di Resta";
             	skill 	= 65; 
+
             	fileName = "di_resta.jpg";
+
             }
             break;
             case Sutil:{
@@ -299,6 +301,7 @@ public class Pilot implements Serializable{
 			return arg1.getSeasonPoints() - arg0.getSeasonPoints();
 		}		
 	}
+
 
 	
 	

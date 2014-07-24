@@ -40,12 +40,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+
         android:layout_marginTop="70dp"
         android:layout_toRightOf="@id/constructorPointsTeam"
+
         android:text="Constructor Points: 220"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
+
         android:id="@+id/textEngineTeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -135,33 +138,40 @@
 
     <Button
         android:id="@+id/trainEngineers"
+
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+
         android:layout_below="@+id/projectedBalanceTeam"
         android:layout_marginTop="36dp"
         android:minHeight="24dp"
         android:onClick="upgradeTeamEngineers"
         android:text="Train Engineers" />
 
+
     <TextView
         android:id="@+id/textFanCountTeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+
         android:layout_below="@+id/trainPlanners"
         android:layout_marginTop="23dp"
+
         android:text="Fan Count: 412320"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
+
         android:id="@+id/textReputacaoTeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textFanCountTeam"
         android:text="Reputation: 6"
+
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.digitreko.ui.f1managerui;
 
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,13 +15,16 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Context;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
+
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Manager;
 import com.digitreko.games.model.Team;
+
 import com.digitreko.ui.auxiliar.TabsPagerAdapter;
 import com.example.f1managerui.R;
  
@@ -31,7 +35,9 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
+
     private String[] tabs = { "Next Race","Team" ,"Pilots", "Cars" ,"Finance", "Manager"};
+
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +67,9 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
             @Override
             public void onPageSelected(int position) {
                 // on changing the page
+
                 // make respected tab selected            	
+
                 actionBar.setSelectedNavigationItem(position);
             }
  
@@ -73,13 +81,17 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+
         
+
     }
  
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
+
     	
     	
+
     }
  
     @Override
@@ -91,6 +103,7 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
  
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+
     	
     }
     
@@ -174,6 +187,7 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
     	System.out.print("RESTART");
     	System.out.println("base");
     	super.onRestart();    	
+
     }
  
 }
@@ -249,6 +263,7 @@ public class BaseNavigationSpinnerActivity extends Activity implements ActionBar
         return true;
     }
 }
+<<<<<<< HEAD
 
 ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
     	//File file = new File(Activity., "save.sav");
@@ -302,4 +317,6 @@ ByteArrayOutputStream bos = new ByteArrayOutputStream();
         Team m = (Team) object;
         System.out.println(m.toString());
         
+=======
+>>>>>>> origin/master
 */

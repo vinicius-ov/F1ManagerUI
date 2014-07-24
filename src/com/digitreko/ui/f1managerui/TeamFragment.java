@@ -1,6 +1,7 @@
 package com.digitreko.ui.f1managerui;
 
 
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,11 +16,13 @@ import android.widget.Toast;
 
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.RaceCar;
+
 import com.digitreko.games.model.Team;
 import com.example.f1managerui.R;
  
 public class TeamFragment extends Fragment {
  
+
 	protected static final String PLANNERS_LEVEL = "Planners Level ";
 	protected static final String RANDD_LEVEL = "R&D Level ";
 	private final String UPGRADE_MESSAGE = "Confirm Upgrade: ";
@@ -39,20 +42,24 @@ public class TeamFragment extends Fragment {
 	private TextView textPlanners;
 	private TextView textProjected;
 	
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
         View rootView = inflater.inflate(R.layout.fragment_team, container, false);
         
+
         godClass = F1GameManager.getInstance();
         playerTeam = godClass.getPCTeam();
+
         fillTeamData(rootView);
         
         return rootView;
     }
  
     public void fillTeamData(View rootView){
+
     	
     	
     	TextView textName = (TextView) rootView.findViewById(R.id.teamNameTeam);    	
@@ -67,8 +74,10 @@ public class TeamFragment extends Fragment {
     	textRandD = (TextView) rootView.findViewById(R.id.randdLevel);
     	textPlanners = (TextView) rootView.findViewById(R.id.plannersLevel);
     	
+
     	TextView textFansCount = (TextView) rootView.findViewById(R.id.textFanCountTeam);
     	TextView textReputation = (TextView) rootView.findViewById(R.id.textReputacaoTeam);
+
 
 
     	textName.setText(playerTeam.getName().toString());
@@ -242,3 +251,4 @@ public class TeamFragment extends Fragment {
     	dialog.show();
     }
 }
+

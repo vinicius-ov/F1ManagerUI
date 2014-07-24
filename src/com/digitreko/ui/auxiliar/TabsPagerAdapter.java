@@ -1,5 +1,6 @@
 package com.digitreko.ui.auxiliar;
 
+
 import java.io.ObjectInputStream.GetField;
 
 import android.support.v4.app.Fragment;
@@ -33,14 +34,13 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 			return new TeamFragment();
 		case 2:        				
 			return new PilotsFragment();
-		case 3:{
-			//UpgradeCarFragment ucf = new UpgradeCarFragment();
+		case 3:		
 			return new UpgradeCarFragment();
-		}
 		case 4:
-			return new FinanceFragment();
+			//return new UpgradeFinanceFragment();
+			return new UpgradeCarFragment();
 		case 5:			
-			return new ManagerFragment();
+			return new ManagerFragment();			
 		}
 
 		return null;
@@ -51,5 +51,6 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 		// get item count - equal to number of tabs
 		return NUMBER_OF_FRAGMENTS;
 	}
+
 
 }
