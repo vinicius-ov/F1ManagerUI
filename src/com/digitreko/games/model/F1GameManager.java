@@ -1,15 +1,12 @@
 package com.digitreko.games.model;
 
 import java.io.IOException;
-
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
-
+import android.content.Context;
 import android.util.Log;
 
 public class F1GameManager implements Serializable {
@@ -18,18 +15,17 @@ public class F1GameManager implements Serializable {
 	final int RACE_LAPS = 5;
 	final int QUALIFY_LAPS = 2; 	
 
-	private ArrayList<Team> teams;
+	private List<Team> teams;
 	private Team PCTeam;			//this will be the team picked by the player or current controlled by PC,
 	//tells the system to build default UI with this team and AI ignores this one
 	private int gameMode;	
 	private  boolean isRace;	//isRace true uses RACE_LAPS, false uses QUALIFY_LAPS
 	private  Track actualRace;	
 	private  RaceSettings settings;
-	private  int currentRace;	
 	private static F1GameManager globalGameManager;
 	private Manager player;
 	private double interest;
-
+	private SessionManager sessionManager;
 
 	/**
 	 * @param args
@@ -42,7 +38,7 @@ public class F1GameManager implements Serializable {
 		//initializeAllTracks();
 		//initializeSeason();
 		initializeTeams();
-		currentRace = 1;
+		sessionManager = new SessionManager();
 		interest = 0;	}
 
 
@@ -309,7 +305,7 @@ public class F1GameManager implements Serializable {
 		}
 
 		clearPastOutcome();	//resetCarStats/money sponsors etc
-		currentRace++;
+		sessionManager.setCurrentRace(sessionManager.getCurrentRace()+1);
 	}
 
 	private   List<RaceCar> getAllCars(){
@@ -425,12 +421,12 @@ public class F1GameManager implements Serializable {
 	}
 
 
-	public   ArrayList<Team> getTeams() {
+	public List<Team> getTeams() {
 		return teams;
 	}
 
 
-	public   void setTeams(ArrayList<Team> teams) {
+	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
 
@@ -488,16 +484,16 @@ public class F1GameManager implements Serializable {
 	public   void setSettings(RaceSettings settings) {
 		this.settings = settings;
 	}
-
-
-	public   int getCurrentRace() {
-		return currentRace;
+	
+	public SessionManager getSessionManager() {
+		return sessionManager;
 	}
 
 
-	public   void setCurrentRace(int currentRace) {
-		this.currentRace = currentRace;
+	public void setSessionManager(SessionManager sessionManager) {
+		this.sessionManager = sessionManager;
 	}
+
 
 	public   int getRaceLaps() {
 		return RACE_LAPS;
@@ -520,6 +516,17 @@ public class F1GameManager implements Serializable {
 		//this method will generate round interest based in a lot of factors
 		//refer to design manual
 		return 10;
+	}
+
+
+	@Override
+	public String toString() {
+		return "F1GameManager [RACE_LAPS=" + RACE_LAPS + ", QUALIFY_LAPS="
+				+ QUALIFY_LAPS + ", teams=" + teams + ", PCTeam=" + PCTeam
+				+ ", gameMode=" + gameMode + ", isRace=" + isRace
+				+ ", actualRace=" + actualRace + ", settings=" + settings
+				+ ", player=" + player + ", interest=" + interest
+				+ ", sessionManager=" + sessionManager + "]";
 	}
 	
 

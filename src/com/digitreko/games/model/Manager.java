@@ -1,9 +1,18 @@
 package com.digitreko.games.model;
 
-public class Manager {
+import java.io.Serializable;
+
+public class Manager implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -722048577435286148L;
 	private String name;
 	private String nationality;
-	private Team playerTeam;	//a pointer to players team
+	private int age;
+	private int yearsInCommand;
+	
 	
 	public Manager(){
 		
@@ -22,12 +31,26 @@ public class Manager {
 		this.nationality = nationality;
 	}
 
-	public Team getPlayerTeam() {
-		return playerTeam;
+	public int getAge() {
+		return age;
 	}
 
-	public void setPlayerTeam(Team playerTeam) {
-		this.playerTeam = playerTeam;
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getYearsInCommand() {
+		return yearsInCommand;
+	}
+
+	public void setYearsInCommand(int yearsInCommand) {
+		this.yearsInCommand = yearsInCommand;
+	}
+
+	@Override
+	public String toString() {
+		return "Manager [name=" + name + ", nationality=" + nationality
+				+ ", age=" + age + ", yearsInCommand=" + yearsInCommand + "]";
 	}
 	
 	

@@ -1,34 +1,21 @@
 package com.digitreko.games.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
-import java.util.List;
 
-public class SessionManager {
-		private List<Pilot> pilotStanding;
-		private List<Team> TeamStanding;
+public class SessionManager implements Serializable{
+	
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4905054272835099711L;
 		private int currentRace;
 		private int year;
 		
 		public SessionManager(){
 			year=Calendar.getInstance().get(Calendar.YEAR);
+			currentRace = 1;
 		}
-
-		public List<Pilot> getPilotStanding() {
-			return pilotStanding;
-		}
-
-		public void setPilotStanding(List<Pilot> pilotStanding) {
-			this.pilotStanding = pilotStanding;
-		}
-
-		public List<Team> getTeamStanding() {
-			return TeamStanding;
-		}
-
-		public void setTeamStanding(List<Team> teamStanding) {
-			TeamStanding = teamStanding;
-		}
-
 		public int getCurrentRace() {
 			return currentRace;
 		}
@@ -43,6 +30,11 @@ public class SessionManager {
 
 		public void setYear(int year) {
 			this.year = year;
+		}
+		@Override
+		public String toString() {
+			return "SessionManager [currentRace=" + currentRace + ", year="
+					+ year + "]";
 		}
 		
 		

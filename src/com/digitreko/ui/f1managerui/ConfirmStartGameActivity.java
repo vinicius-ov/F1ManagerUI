@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.digitreko.games.model.AppLifecycleManager;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Manager;
 import com.example.f1managerui.R;
@@ -38,9 +39,10 @@ public class ConfirmStartGameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_confirm_start_game);
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		
-    	godClass = F1GameManager.getInstance();
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+	
+		godClass = F1GameManager.getInstance();
     	Manager player = godClass.getPlayer();
     	
 		selectedTeam = settings.getString("selectedTeam", "ImError");
@@ -133,6 +135,9 @@ public class ConfirmStartGameActivity extends Activity {
     	System.out.println("Team: "+selectedTeam);
     	godClass.setPlayerControlledTeam(selectedTeam);
 
+    	//set application to start from beggining 
+    	AppLifecycleManager.setRecoveringDisabled(getApplicationContext());
+    	
 		Intent intent = new Intent(this,BaseTabbedNavigationActivity.class);
 		startActivity(intent);
 	}

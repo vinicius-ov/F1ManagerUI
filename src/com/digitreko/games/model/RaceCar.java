@@ -69,14 +69,11 @@ public class RaceCar implements Serializable{
 		case FOR1:
 			value = FORCE_INDIA;
 			break;
-		default:
-			try {
-				throw new Exception("Team code not found. Using default value!");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				value = FORCE_INDIA;			}
-
+		default:{
+			System.out.println("Team code not found. Using default value!");
+			value = FORCE_INDIA;
 			break;
+		}	
 		};	
 		currentSection = 0;
 		sectionStatus = false;

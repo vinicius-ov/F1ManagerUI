@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.digitreko.games.model.AppLifecycleManager;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.RaceCar;
 
@@ -48,9 +49,9 @@ public class TeamFragment extends Fragment {
             Bundle savedInstanceState) {
  
         View rootView = inflater.inflate(R.layout.fragment_team, container, false);
-        
-
+      
         godClass = F1GameManager.getInstance();
+        
         playerTeam = godClass.getPCTeam();
 
         fillTeamData(rootView);

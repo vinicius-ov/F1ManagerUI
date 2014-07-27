@@ -10,21 +10,21 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Context;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-
+import com.digitreko.games.model.AppLifecycleManager;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Manager;
+import com.digitreko.games.model.SessionManager;
 import com.digitreko.games.model.Team;
-
 import com.digitreko.ui.auxiliar.TabsPagerAdapter;
 import com.example.f1managerui.R;
  
@@ -82,8 +82,9 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
             }
         });
 
-        
-
+        AppLifecycleManager.restoreApplicationState(getApplicationContext());
+        F1GameManager f1 = F1GameManager.getInstance();        
+        f1.setGameMode(1);
     }
  
     @Override
@@ -110,73 +111,22 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
     @Override
 	public void onStop()
 	{
-    	//recover code goes here
-    	FileOutputStream fos;
-    	Manager m = F1GameManager.getInstance().getPlayer();
-    	Team t = F1GameManager.getInstance().getPCTeam();
-
-		try {
-			fos = getApplicationContext().openFileOutput("save.sav", Context.MODE_PRIVATE);			
-			ObjectOutputStream os = new ObjectOutputStream(fos);
-	    	os.writeObject(t);
-	    	os.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	
-    	//recover code stops here    	
-    	
     	System.out.println("STOP base");
+    	//persistence code goes here    	
+    	AppLifecycleManager.setRecoveringEnabled(getApplicationContext());
+    	AppLifecycleManager.saveBackupToRestoreApp(getApplicationContext());    	
+    	//persistence code stops here    	
+    	
+    	
     	super.onStop();	
-	}
-
-    @Override
-	public void onPause()
-	{
-    	System.out.println("PAUSE base");
-    	super.onPause();
-		
 	}
 
     @Override
     public void onResume(){
     	System.out.print("RESUME");
 		System.out.println("base");
-    	
 		//here starts recover code		
-		FileInputStream fis;
-		Team simpleClass = null; 
-		try {
-			fis = getApplicationContext().openFileInput("save.sav");
-			ObjectInputStream is = new ObjectInputStream(fis);
-			simpleClass = (Team) is.readObject();
-			is.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (StreamCorruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			System.out.println("Manager: "+simpleClass.toString());
-		} catch (NullPointerException e) {
-			System.out.println("Nada para mostrar...");
-		}
-		
-		
+		AppLifecycleManager.restoreApplicationState(getApplicationContext());
 		//here stops recover code
 		super.onResume();
     	
@@ -189,7 +139,18 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
     	super.onRestart();    	
 
     }
- 
+    
+    
+    //this will ignore back button presses, only activate it in final version
+    /*
+     * (non-Javadoc)
+     * @see android.support.v4.app.FragmentActivity#onBackPressed()
+    
+    public void onBackPressed(){
+    	System.out.println("Back button pressed!!!");
+    }
+    */
+    
 }
 
 

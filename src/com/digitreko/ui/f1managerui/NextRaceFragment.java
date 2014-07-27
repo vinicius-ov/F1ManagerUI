@@ -37,7 +37,7 @@ public class NextRaceFragment extends Fragment {
     	final F1GameManager godClass;
     	godClass = F1GameManager.getInstance();
     	//List<Track> tracks = godClass.getTracks();
-    	int num = godClass.getCurrentRace();
+    	int num = godClass.getSessionManager().getCurrentRace();
     	Track tr = null;
 		try {
 			tr = godClass.getTrack(num);

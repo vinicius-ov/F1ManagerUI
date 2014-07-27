@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
+import com.digitreko.games.model.AppLifecycleManager;
 import com.example.f1managerui.R;
 
 public class F1Manager extends Activity {
@@ -36,6 +37,8 @@ public class F1Manager extends Activity {
 	}
 	public void exitApp(View view){
 		System.out.println("App terminated by user via main menu!");
+		//makes game restart
+		AppLifecycleManager.setRecoveringDisabled(getApplicationContext());
 		super.finish();
 	}
 	

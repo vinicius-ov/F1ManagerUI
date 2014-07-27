@@ -29,7 +29,7 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 
 		switch (index) {
 		case 0:			
-			return new NextRaceFragment();
+			return new NextRaceFragment();			
 		case 1:
 			return new TeamFragment();
 		case 2:        				
@@ -38,7 +38,7 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 			return new UpgradeCarFragment();
 		case 4:
 			//return new UpgradeFinanceFragment();
-			return new UpgradeCarFragment();
+			return new FinanceFragment();
 		case 5:			
 			return new ManagerFragment();			
 		}

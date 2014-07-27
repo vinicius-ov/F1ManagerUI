@@ -65,10 +65,10 @@ public class UpgradeCarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	
-    	godClass = F1GameManager.getInstance();
-    	pcTeam = godClass.getPCTeam();   	
+    	View rootView = inflater.inflate(R.layout.fragment_race_car, container, false);
     	
-        View rootView = inflater.inflate(R.layout.fragment_race_car, container, false);
+    	godClass = F1GameManager.getInstance();
+    	pcTeam = godClass.getPCTeam();   	    	
         
         upgradeTires = (Button) rootView.findViewById(R.id.upgradeTiress);       
         upgradeTires.setOnClickListener(new View.OnClickListener() {       

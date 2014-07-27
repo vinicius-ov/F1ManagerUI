@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.digitreko.games.model.AppLifecycleManager;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Manager;
 import com.digitreko.games.model.RaceCar;
@@ -34,10 +35,10 @@ public class FinanceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
+    	View rootView = inflater.inflate(R.layout.fragment_finance, container, false);
+    	
     	godClass = F1GameManager.getInstance();
     	
-        View rootView = inflater.inflate(R.layout.fragment_finance, container, false);
-        
         fillFinance(rootView);
         
         return rootView;
