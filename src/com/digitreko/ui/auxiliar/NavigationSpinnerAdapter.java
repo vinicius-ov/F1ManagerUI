@@ -11,7 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.f1managerui.R;
+import com.digitreko.f1manager.R;
+
+
 
 
  

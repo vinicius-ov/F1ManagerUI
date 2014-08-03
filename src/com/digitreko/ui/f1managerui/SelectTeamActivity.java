@@ -9,8 +9,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Spinner;
 
+import com.digitreko.f1manager.R;
 import com.digitreko.ui.auxiliar.CustomOnItemSelectedListener;
-import com.example.f1managerui.R;
 
 public class SelectTeamActivity extends Activity {
 
@@ -27,7 +27,7 @@ public class SelectTeamActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_or_pick_team, menu);
+		//getMenuInflater().inflate(R.menu.create_or_pick_team, menu);
 		return true;
 	}
 
@@ -41,6 +41,7 @@ public class SelectTeamActivity extends Activity {
 		SharedPreferences data = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		SharedPreferences.Editor editor = data.edit();
 		editor.putString("selectedTeam", time);
+		System.out.println("Selected team to start a new game is ["+time+"].");
 		editor.putString("customTeamName", "empty");
 		editor.commit();
 

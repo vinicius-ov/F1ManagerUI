@@ -2,16 +2,14 @@ package com.digitreko.ui.f1managerui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Manager;
-import com.example.f1managerui.R;
 
 public class CreateManagerActivity extends Activity {
 	
@@ -33,7 +31,7 @@ public class CreateManagerActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_manager, menu);
+		//getMenuInflater().inflate(R.menu.create_manager, menu);
 		return true;
 	}
 

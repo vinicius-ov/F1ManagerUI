@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Manager;
 import com.digitreko.games.model.Team;
-import com.example.f1managerui.R;
  
 public class ManagerFragment extends Fragment {
  

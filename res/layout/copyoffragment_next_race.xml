@@ -30,11 +30,21 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
+        android:id="@+id/button3"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Free test" />
+
+    <Button
         android:id="@+id/exitBtn"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/button3"
         android:text="Qualify" />
 
     <ImageView

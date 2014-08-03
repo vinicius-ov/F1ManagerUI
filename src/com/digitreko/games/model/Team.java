@@ -161,7 +161,7 @@ public class Team implements Serializable{
 		}
 		break;
 		case WIL1:{
-			name = "Willians";
+			name = "Williams";
 			engine = "Renault";
 			engineers = 9;
 			planners = 6;
@@ -189,7 +189,7 @@ public class Team implements Serializable{
 		}
 		break;
 		case CAT1:{
-			name = "Caterhan";
+			name = "Caterham";
 			engine = "Renault";
 			engineers = 9;
 			planners = 6;
@@ -511,6 +511,8 @@ public class Team implements Serializable{
 			return arg1.getSeasonPoints() - arg0.getSeasonPoints();
 		}		
 	}
+	
+	
 
 }
 

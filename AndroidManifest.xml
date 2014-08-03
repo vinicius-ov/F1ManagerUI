@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.f1managerui"
+    package="com.digitreko.f1manager"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -10,14 +10,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/car1"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.digitreko.ui.f1managerui.F1Manager"
-            android:label="@string/title_activity_main" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,88 +29,92 @@
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.BaseTabbedNavigationActivity"
-            android:label="@string/title_activity_pilots" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_pilots"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.PilotsFragment"
-            android:label="@string/title_activity_pilots" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_pilots"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.DisplayMessageActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_display_message"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"    >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.TeamFragment"
-            android:label="@string/title_activity_team" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_team"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.SelectGameModeActivity"
-            android:label="@string/title_activity_select_game_mode" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_select_game_mode"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.SelectTeamActivity"
-            android:label="@string/title_activity_create_or_pick_team" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_create_or_pick_team"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.CreateTeamActivity"
-            android:label="@string/title_activity_create_team" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_create_team"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.CreateManagerActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_create_manager"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"    >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.ConfirmStartGameActivity"
-            android:label="@string/title_activity_confirm_start_game" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_confirm_start_game"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.NextRaceFragment"
-            android:label="@string/title_activity_next_race" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_next_race"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.FinanceFragment"
-            android:label="@string/title_activity_finance" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_finance"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.PilotActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_pilot"
-            android:theme="@style/FullscreenTheme" 
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
             android:name="com.example.f1managerui.TabsPageAdapter"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_tabs_page_adapter"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"    >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.digitreko.ui.f1managerui.PilotMoreInfoActivity"
-            android:label="@string/title_activity_pilot_more_info" 
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"   >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_pilot_more_info"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.digitreko.ui.f1managerui.LoadGameActivity"
+            android:label="@string/title_activity_load_game" >
         </activity>
     </application>
 

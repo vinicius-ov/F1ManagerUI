@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.digitreko.games.model.CarPart;
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.RaceCar;
 import com.digitreko.games.model.Team;
-import com.example.f1managerui.R;
 
  
 public class PilotsFragment extends Fragment {

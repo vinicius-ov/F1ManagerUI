@@ -1,9 +1,23 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android" > 
+	  
+    
     <item
+        android:id="@+id/action_loadgame"
+        android:orderInCategory="110"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/load"
+        android:title="Load Game"/>
+	<item
         android:id="@+id/action_settings"
+        android:orderInCategory="200"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/settings"
+        android:title="Settings"/>
+    <item
+        android:id="@+id/action_savegame"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
-
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/save"
+        android:title="Save Game"/>
+    
 </menu>

@@ -1,12 +1,9 @@
 package com.digitreko.ui.auxiliar;
 
 
-import java.io.ObjectInputStream.GetField;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.text.style.UpdateAppearance;
 
 import com.digitreko.ui.f1managerui.FinanceFragment;
 import com.digitreko.ui.f1managerui.ManagerFragment;

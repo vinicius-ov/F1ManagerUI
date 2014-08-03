@@ -15,7 +15,7 @@
         android:layout_alignLeft="@+id/newGame"
         android:layout_alignRight="@+id/newGame"
         android:background="@android:drawable/btn_default"
-        android:onClick="sendMessage"
+        android:onClick="gotoLoadGameScreen"
         android:text="@string/continueGame" />
 
     <Button
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/continueBtn"
         android:background="@android:drawable/btn_default"
-        android:onClick="sendMessage"
+        android:onClick="gotoCreateManagerScreen"
         android:text="@string/newGame" />
 
     <Button

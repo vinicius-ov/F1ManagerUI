@@ -1,7 +1,5 @@
 package com.digitreko.ui.f1managerui;
 
-import com.example.f1managerui.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+
+import com.digitreko.f1manager.R;
 
 public class CreateTeamActivity extends Activity {
 	
@@ -26,7 +26,7 @@ public class CreateTeamActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_team, menu);
+		//getMenuInflater().inflate(R.menu.create_team, menu);
 		return true;
 	}
 	

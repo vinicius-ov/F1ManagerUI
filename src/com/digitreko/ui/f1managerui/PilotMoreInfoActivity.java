@@ -1,13 +1,10 @@
 package com.digitreko.ui.f1managerui;
 
-import com.example.f1managerui.R;
-import com.example.f1managerui.R.layout;
-import com.example.f1managerui.R.menu;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.digitreko.f1manager.R;
 
 public class PilotMoreInfoActivity extends Activity {
 

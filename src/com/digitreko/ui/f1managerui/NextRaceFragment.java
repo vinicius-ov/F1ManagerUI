@@ -3,20 +3,26 @@ package com.digitreko.ui.f1managerui;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Track;
-import com.example.f1managerui.R;
  
 public class NextRaceFragment extends Fragment {
  
@@ -60,6 +66,42 @@ public class NextRaceFragment extends Fragment {
     	ImageView iv = (ImageView) rootView.findViewById(R.id.raceMap);
     	iv.setImageBitmap(BitmapFactory.decodeStream(is));
     	
+    	ListView teamsStandings = (ListView) rootView.findViewById(R.id.listConstructorStanding);
+    	ArrayAdapter<String> teamAdapter =new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.listview_standings,R.id.stringStandings,godClass.getTeamNamesAndPoints());    	
+    	teamsStandings.setAdapter(teamAdapter);
+    	
+    	ListView pilotsStandings = (ListView) rootView.findViewById(R.id.listPilotStandings);
+    	ArrayAdapter<String> pilotsAdapter =new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.listview_standings,R.id.stringStandings,godClass.getPilotNamesAndPoints());
+    	pilotsStandings.setAdapter(pilotsAdapter);    	
+    	
+    }
+    
+    private class StableArrayAdapter extends ArrayAdapter<String> {
+
+		public StableArrayAdapter(Context context, int resource,
+				int textViewResourceId, String[] objects) {
+			super(context, resource, textViewResourceId, objects);
+			// TODO Auto-generated constructor stub
+		}
+
+		
+    	
     }
  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

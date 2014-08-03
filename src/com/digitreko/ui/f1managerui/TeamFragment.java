@@ -2,11 +2,11 @@ package com.digitreko.ui.f1managerui;
 
 
 
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +14,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.digitreko.games.model.AppLifecycleManager;
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.F1GameManager;
-import com.digitreko.games.model.RaceCar;
-
 import com.digitreko.games.model.Team;
-import com.example.f1managerui.R;
  
 public class TeamFragment extends Fragment {
  

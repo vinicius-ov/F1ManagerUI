@@ -1,8 +1,6 @@
 package com.digitreko.ui.f1managerui;
 
 
-import java.util.Currency;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,12 +13,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.digitreko.games.model.AppLifecycleManager;
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Manager;
-import com.digitreko.games.model.RaceCar;
 import com.digitreko.games.model.Team;
-import com.example.f1managerui.R;
  
 public class FinanceFragment extends Fragment {
 	

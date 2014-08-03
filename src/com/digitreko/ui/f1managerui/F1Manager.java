@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.AppLifecycleManager;
-import com.example.f1managerui.R;
 
 public class F1Manager extends Activity {
 
@@ -27,12 +27,17 @@ public class F1Manager extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		//getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
-	public void sendMessage(View view){
+	public void gotoCreateManagerScreen(View view){
 		Intent intent = new Intent(this,CreateManagerActivity.class);
+		startActivity(intent);
+	}
+	public void gotoLoadGameScreen(View view){
+		AppLifecycleManager.setRecoveringDisabled(getApplicationContext());
+		Intent intent = new Intent(this,LoadGameActivity.class);
 		startActivity(intent);
 	}
 	public void exitApp(View view){
@@ -68,4 +73,5 @@ public class F1Manager extends Activity {
     	System.out.println("main");
     	super.onRestart();    	
     }
+    
 }

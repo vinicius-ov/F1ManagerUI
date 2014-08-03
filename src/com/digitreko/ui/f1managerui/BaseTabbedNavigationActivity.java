@@ -3,30 +3,26 @@ package com.digitreko.ui.f1managerui;
 
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.AppLifecycleManager;
 import com.digitreko.games.model.F1GameManager;
-import com.digitreko.games.model.Manager;
-import com.digitreko.games.model.SessionManager;
-import com.digitreko.games.model.Team;
 import com.digitreko.ui.auxiliar.TabsPagerAdapter;
-import com.example.f1managerui.R;
  
 public class BaseTabbedNavigationActivity extends FragmentActivity implements
         ActionBar.TabListener {
@@ -51,8 +47,8 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
  
         viewPager.setAdapter(mAdapter);
         //actionBar.setHomeButtonEnabled(false); //stopped working after who knows
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);       
- 
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);       
+        
         // Adding Tabs
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
@@ -70,7 +66,7 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
 
                 // make respected tab selected            	
 
-                actionBar.setSelectedNavigationItem(position);
+                //actionBar.setSelectedNavigationItem(position);
             }
  
             @Override
@@ -82,18 +78,19 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
             }
         });
 
-        AppLifecycleManager.restoreApplicationState(getApplicationContext());
-        F1GameManager f1 = F1GameManager.getInstance();        
-        f1.setGameMode(1);
+        AppLifecycleManager.restoreApplicationState(getApplicationContext());       
     }
  
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
-
-    	
-    	
-
     }
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
  
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
@@ -140,7 +137,82 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
 
     }
     
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_savegame:
+                saveGame();
+                return true;
+            case R.id.action_loadgame:
+                loadGame();                
+                return true;
+            case R.id.action_settings:
+            	lauchSettingsActivity();
+            	return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+	private void lauchSettingsActivity() {
+		//Toast.makeText(getApplicationContext(), "Settings screen!", Toast.LENGTH_LONG).show();
+		File file = getApplicationContext().getDir("backup", Context.MODE_PRIVATE);
+		try {
+			System.out.println(file.getCanonicalPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		File[] files = file.listFiles();
+		for (int i = 0;i < files.length;i++){
+			System.out.println(files[i].getName());
+		}
+		AppLifecycleManager.cleanAllSaves(getApplicationContext());
+		Toast.makeText(getApplicationContext(), "Files: "+files.length, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "Count: "+files.listFiles(), Toast.LENGTH_LONG).show();
+	}
+
+	private void loadGame() {
+		Toast.makeText(getApplicationContext(), "Loading game!", Toast.LENGTH_LONG).show();
+		loadGamePopupConfirmation();
+	}
+
+	private void saveGame() {
+		saveGamePopupConfirmation();		
+	}
     
+    private void saveGamePopupConfirmation() {
+    	AlertDialog.Builder builder = new AlertDialog.Builder(getWindow().getContext());    	
+    	// Add the buttons
+    	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    	           public void onClick(DialogInterface dialog, int id) {
+    	               AppLifecycleManager.saveGameWithName(getApplicationContext(),F1GameManager.getInstance().getPlayer().getName());
+    	               String saveName= F1GameManager.getInstance().getPlayer().getName();
+    	               System.out.println(saveName);
+    	               Toast.makeText(getWindow().getContext(), "Game saved as "+saveName+"!", Toast.LENGTH_SHORT).show();
+    	           }
+    	       });
+    	builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+    	           public void onClick(DialogInterface dialog, int id) {
+    	               Toast.makeText(getWindow().getContext(), "Save cancelled!", Toast.LENGTH_SHORT).show();
+    	               AppLifecycleManager.loadGameByName(getWindow().getContext(), F1GameManager.getInstance().getPlayer().getName());
+    	           }
+    	       });
+
+    	// Create the AlertDialog
+    	AlertDialog dialog = builder.create();
+    	//Add name of player to save prompt
+    	dialog.setTitle("Game will be saved as '"+F1GameManager.getInstance().getPlayer().getName()+"'. Confirm?");
+    	dialog.show();
+	}
+    
+    public void loadGamePopupConfirmation(){
+    	//AppLifecycleManager.loadGameByName(getWindow().getContext(), F1GameManager.getInstance().getPlayer().getName());
+    	Intent intent = new Intent(this,LoadGameActivity.class);
+		startActivity(intent);
+    }
+	
     //this will ignore back button presses, only activate it in final version
     /*
      * (non-Javadoc)

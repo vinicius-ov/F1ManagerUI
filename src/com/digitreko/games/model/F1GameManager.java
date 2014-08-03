@@ -18,7 +18,7 @@ public class F1GameManager implements Serializable {
 	private List<Team> teams;
 	private Team PCTeam;			//this will be the team picked by the player or current controlled by PC,
 	//tells the system to build default UI with this team and AI ignores this one
-	private int gameMode;	
+		
 	private  boolean isRace;	//isRace true uses RACE_LAPS, false uses QUALIFY_LAPS
 	private  Track actualRace;	
 	private  RaceSettings settings;
@@ -291,7 +291,7 @@ public class F1GameManager implements Serializable {
 		pilots.get(9).addPoints(1);
 		System.out.println(pilots.get(9).getName() + " recebeu 1 pontos. Total= "+pilots.get(9).getSeasonPoints());
 
-		Collections.sort(teams, new Team.PointsComparator());
+		Collections.sort(teams, new Team.PointsComparator());		
 
 		for (Team team: teams){
 			System.out.println(team.getName()+" tem "+team.getSeasonPoints()+" pontos na temporada.");
@@ -387,9 +387,12 @@ public class F1GameManager implements Serializable {
 	
 	public void setPlayerControlledTeam(String selectedTeam){
 		System.out.println("Team: "+selectedTeam);
+		System.out.println("Teams size: "+teams.size());
 		for (Team t: teams){
+			System.out.println("Team: "+selectedTeam+" team found:"+t.getName());
 			if (t.getName().equals(selectedTeam)){
 				t.setPlayerControlled(true);
+				break;
 			}
 		}
 		setToLowestValuesStartGame(getSponsor(0));
@@ -402,6 +405,8 @@ public class F1GameManager implements Serializable {
 	}
 	
 	private void setToLowestValuesStartGame(Sponsor sponsor){
+		System.out.println("Setting team sponsor to initial values..."); 
+		System.out.println(getPCTeam().toString());
 		getPCTeam().setToLowestValues(sponsor);		
 	}
 	
@@ -444,17 +449,6 @@ public class F1GameManager implements Serializable {
 	public void setPCTeam(Team pCTeam) {
 		PCTeam = pCTeam;
 	}
-
-
-	public   int getGameMode() {
-		return gameMode;
-	}
-
-
-	public   void setGameMode(int gameMode) {
-		this.gameMode = gameMode;
-	}
-
 
 	public   boolean isRace() {
 		return isRace;
@@ -517,17 +511,41 @@ public class F1GameManager implements Serializable {
 		//refer to design manual
 		return 10;
 	}
-
-
+	
 	@Override
 	public String toString() {
 		return "F1GameManager [RACE_LAPS=" + RACE_LAPS + ", QUALIFY_LAPS="
 				+ QUALIFY_LAPS + ", teams=" + teams + ", PCTeam=" + PCTeam
-				+ ", gameMode=" + gameMode + ", isRace=" + isRace
-				+ ", actualRace=" + actualRace + ", settings=" + settings
-				+ ", player=" + player + ", interest=" + interest
-				+ ", sessionManager=" + sessionManager + "]";
+				+ ", isRace=" + isRace + ", actualRace=" + actualRace
+				+ ", settings=" + settings + ", player=" + player
+				+ ", interest=" + interest + ", sessionManager="
+				+ sessionManager + "]";
+	}
+
+
+	public String[] getTeamNamesAndPoints(){
+		String[] namesWithPoints= new String[teams.size()];
+		int i=0;
+		Collections.sort(teams, new Team.PointsComparator());
+		for (Team t:teams)
+		{
+			String temp = t.getName()+"    "+t.getSeasonPoints();
+			namesWithPoints[i]= temp;
+			i++;
+		}return namesWithPoints;
 	}
 	
+	public String[] getPilotNamesAndPoints(){
+		String[] namesWithPoints= new String[teams.size()*2];
+		int i=0;
+		List<Pilot> pilots = getAllPilots("points");		
+		for (Pilot p:pilots)
+		{
+			String temp = p.getName()+"    "+p.getSeasonPoints();
+			namesWithPoints[i]= temp;
+			i++;
+		}
+		return namesWithPoints;
+	}
 
 }

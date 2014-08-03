@@ -9,10 +9,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.AppLifecycleManager;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Manager;
-import com.example.f1managerui.R;
 
 public class ConfirmStartGameActivity extends Activity {
 
@@ -44,6 +44,7 @@ public class ConfirmStartGameActivity extends Activity {
 	
 		godClass = F1GameManager.getInstance();
     	Manager player = godClass.getPlayer();
+    	System.out.println("Getting player... "+player.toString());
     	
 		selectedTeam = settings.getString("selectedTeam", "ImError");
 		String selectedMode = settings.getString("gameMode", "ImError");		
@@ -73,7 +74,7 @@ public class ConfirmStartGameActivity extends Activity {
 				tvSelTeam.setText("Random");
 				//set Random and decide now what team the player will control
 				//between 4 of worse campaing in 2013
-				char letter = player.getName().charAt(4); //may return exception
+				char letter = player.getName().charAt(1); //may return exception
 				if (letter == 'm'){
 					selectedTeam = randomTeams.MARUSSIA.getTeam();
 				}
@@ -90,8 +91,11 @@ public class ConfirmStartGameActivity extends Activity {
 					selectedTeam = "Lotus";
 				
 			} else{				
+				System.out.println("name of selected team: "+selectedTeam);
 				selectedTeam = selectedTeam.replace('_', ' ');
 				tvSelTeam.setText(selectedTeam);
+				godClass.setPlayerControlledTeam(selectedTeam);
+				System.out.println("Player team: "+godClass.getPCTeam());
 			}
 		}
 
@@ -101,7 +105,7 @@ public class ConfirmStartGameActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.confirm_start_game, menu);
+		//getMenuInflater().inflate(R.menu.confirm_start_game, menu);
 		return true;
 	}
 	
@@ -132,10 +136,10 @@ public class ConfirmStartGameActivity extends Activity {
     }
 
 	public void gotoStartGame(View view){
-    	System.out.println("Team: "+selectedTeam);
-    	godClass.setPlayerControlledTeam(selectedTeam);
+    	System.out.println("Team: "+selectedTeam);    	
+    	//godClass.initializeTeams();	//to restart point co
 
-    	//set application to start from beggining 
+    	//set application to start from beginning 
     	AppLifecycleManager.setRecoveringDisabled(getApplicationContext());
     	
 		Intent intent = new Intent(this,BaseTabbedNavigationActivity.class);

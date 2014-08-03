@@ -17,12 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.digitreko.f1manager.R;
 import com.digitreko.games.model.CarPart;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.RaceCar;
 import com.digitreko.games.model.Team;
-import com.digitreko.ui.auxiliar.TabsPagerAdapter;
-import com.example.f1managerui.R;
  
 
 public class UpgradeCarFragment extends Fragment {
