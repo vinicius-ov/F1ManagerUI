@@ -19,8 +19,8 @@ public class ManagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
  
-        View rootView = inflater.inflate(R.layout.fragment_manager, container, false);
         
+    	View rootView = inflater.inflate(R.layout.fragment_manager, container, false);
         fillManager(rootView);
         
         return rootView;
@@ -35,11 +35,13 @@ public class ManagerFragment extends Fragment {
     	TextView managerAge = (TextView)rootView.findViewById(R.id.ageManager);
     	TextView managerCountry = (TextView)rootView.findViewById(R.id.nationalityManager);
     	TextView managerTeam = (TextView)rootView.findViewById(R.id.teamManager);
+    	TextView managerYears = (TextView)rootView.findViewById(R.id.yearsManager);
     	
     	managerName.setText(player.getName().toString());
     	managerAge.setText(String.valueOf("Age: "+player.getAge()));
     	managerCountry.setText("Country: "+player.getNationality().toString());
-    	managerTeam.setText("Team: "+playerTeam.getName().toString());
+    	managerTeam.setText("Current Team: "+playerTeam.getName().toString());
+    	managerYears.setText("Years in command: "+ player.getYearsInCommand());
     	
     	
     	

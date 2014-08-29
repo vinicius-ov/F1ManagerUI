@@ -16,6 +16,31 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+/**
+ * Class that manages saving and recovering app state, saving game and
+ * loading. Also sets in shared preferences if app should recover or 
+ * not.
+ * 
+ * Conditions: 
+ * When starting a game, key isRecovering must be set to
+ * false using setRecovingDisabled().
+ * When app goes background, state is saved in backup folder and
+ * isRecoveringEnabled() is called.
+ * When app is back in front, checks if isRecovering key is set to true, causing the game
+ * to recover its state from the backup folder. If false, recover from backup is ignored.
+ * When saving data, get player (manager) name and use it as save name. Create a folder with the name
+ * and save all data. This name is added to the first save slot available.
+ * TODO: must alert the player in case all save slots are occupied.
+ * When loading a game, recover data from folder with save name chosen and launch Base activity.
+ * TODO: add an option to erase saved games.
+ * TODO: only save slots manage data, folders are kept. Must delete these folder to avoid
+ * bloating system.
+ * TODO: join both save and load methods to avoid repetition.
+ * TODO: join isRecoveringEnabled and isRecoveringDisabled to avoid code repetition.
+ * 
+ * @author Vinicius
+ *
+ */
 public class AppLifecycleManager {
 	
 	//sets if application is recovering state (true) or starting over (false)
@@ -50,11 +75,23 @@ public class AppLifecycleManager {
 		editor.commit();
 	}
 	
+	/**
+	 * Check if app is recovering from paused state or starting over.
+	 * 
+	 * @param appContext
+	 * @return
+	 */
 	public static boolean isRecovering(Context appContext){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(appContext);
 		return settings.getBoolean(ISRECOVERING_KEY, false);
 	}
 
+	/**
+	 * Restore app from pause/stop/destroy. Working with all states.
+	 * TODO: merge with load game procedure.
+	 * 
+	 * @param appContext
+	 */
 	public static void restoreApplicationState(Context appContext) {
 		if (isRecovering(appContext)){
 			F1GameManager godClass = F1GameManager.getInstance();
@@ -134,8 +171,10 @@ public class AppLifecycleManager {
 			
 	}
 	
-	/*
-	 * This method will be reused to save game data when user uses Save Game functionality.
+	/**
+	 * Save game data to context to recover later when onResume is called.
+	 * TODO: merge with save game.
+	 * @param appContext
 	 */
 	public static void saveBackupToRestoreApp(Context appContext){
     	String[] saveList = readSaveSlots(appContext);
@@ -196,11 +235,12 @@ public class AppLifecycleManager {
     	
     }
 
-	public static void removeBackupFolder() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * Save player data manually when player pushes save button.
+	 *  
+	 * @param appContext
+	 * @param saveGameName
+	 */
 	public static void saveGameWithName(Context appContext, String saveGameName) {
 		insertSaveInSaveSlot(appContext, saveGameName);
 		System.out.println("Will now save game with name ["+saveGameName+"].");
@@ -259,6 +299,12 @@ public class AppLifecycleManager {
 	    }		
 	}			
 	
+	/**
+	 * Load game data when player select game saved in the list.
+	 * 
+	 * @param appContext
+	 * @param saveGameName
+	 */	
 	public static void loadGameByName(Context appContext, String saveGameName) {
 		//if (isRecovering(appContext)){
 			F1GameManager godClass = F1GameManager.getInstance();
@@ -272,16 +318,16 @@ public class AppLifecycleManager {
 				godClass.setPlayer(player);
 				is.close();
 			} catch (FileNotFoundException e) {
-				System.out.println("PLAYER-File not found. App starting from beginning.");
+				System.out.println(saveGameName+" PLAYER-File not found. App starting from beginning.");
 			} catch (StreamCorruptedException e) {
 				//if could not recover serial class
-				System.out.println("PLAYER-Failed to recover working stream from file!");
+				System.out.println(saveGameName+" PLAYER-Failed to recover working stream from file!");
 			} catch (IOException e) {
 				//in case error accessing files
-				System.out.println("PLAYER-Failed to access files!");
+				System.out.println(saveGameName+" PLAYER-Failed to access files!");
 			} catch (ClassNotFoundException e) {			
 				//in case version of structure is different than found
-				System.out.println("PLAYER-Error with mismatch in class versions.");
+				System.out.println(saveGameName+" PLAYER-Error with mismatch in class versions.");
 			}
 			//get session info from file
 			try {
@@ -291,16 +337,16 @@ public class AppLifecycleManager {
 				godClass.setSessionManager(sessionManager);
 				is.close();
 			} catch (FileNotFoundException e) {
-				System.out.println("SESSION-File not found. App starting from beginning.");
+				System.out.println(saveGameName+" SESSION-File not found. App starting from beginning.");
 			} catch (StreamCorruptedException e) {
 				//if could not recover serial class
-				System.out.println("SESSION-Failed to recover working stream from file!");
+				System.out.println(saveGameName+" SESSION-Failed to recover working stream from file!");
 			} catch (IOException e) {
 				//in case error accessing files
-				System.out.println("SESSION-Failed to access files!");
+				System.out.println(saveGameName+" SESSION-Failed to access files!");
 			} catch (ClassNotFoundException e) {			
 				//in case version of structure is different than found
-				System.out.println("SESSION-Error with mismatch in class versions.");
+				System.out.println(saveGameName+" SESSION-Error with mismatch in class versions.");
 			}
 		
 			//get cars info from file
@@ -313,16 +359,16 @@ public class AppLifecycleManager {
 					newTeamList.add(recoveredTeam);	
 					is.close();					
 				} catch (FileNotFoundException e) {
-					System.out.println("SESSION-File not found. App starting from beginning.");
+					System.out.println(saveGameName+" TEAM-File not found. App starting from beginning.");
 				} catch (StreamCorruptedException e) {
 					//if could not recover serial class
-					System.out.println("SESSION-Failed to recover working stream from file!");
+					System.out.println(saveGameName+" TEAM-Failed to recover working stream from file!");
 				} catch (IOException e) {
 					//in case error accessing files
-					System.out.println("SESSION-Failed to access files!");
+					System.out.println(saveGameName+" TEAM-Failed to access files!");
 				} catch (ClassNotFoundException e) {			
 					//in case version of structure is different than found
-					System.out.println("SESSION-Error with mismatch in class versions.");
+					System.out.println(saveGameName+" TEAM-Error with mismatch in class versions.");
 				}
 			}
 			godClass.setTeams(newTeamList);
@@ -333,6 +379,12 @@ public class AppLifecycleManager {
 				System.out.println(t.toString());
 		}
 	
+	/**
+	 * Read all save slots from preferences.
+	 * 
+	 * @param appContext
+	 * @return a list of strings containing all save names or empty
+	 */
 	public static String[] readSaveSlots(Context appContext){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(appContext);
 		String[] results = new String[NUMBER_OF_SAVES];
@@ -341,6 +393,13 @@ public class AppLifecycleManager {
 		return results;
 	}
 	
+	/**
+	 * Inserts manager name into save slots. Search the first occurrence of EMPTY and stores in that position.
+	 * TODO: must alert the player if no save slots are available.
+	 * 
+	 * @param appContext
+	 * @param saveName
+	 */
 	private static void insertSaveInSaveSlot(Context appContext, String saveName){
 		System.out.println("Checking if save slot already exists!");
 		SharedPreferences data = PreferenceManager.getDefaultSharedPreferences(appContext);
@@ -376,11 +435,19 @@ public class AppLifecycleManager {
 		editor.commit();
 	}
 	
+	/**
+	 * Clean all save slots but keep save data.
+	 * TODO: clean save slots AND folders.
+	 * 
+	 * @param appContext
+	 */
 	public static void cleanAllSaves(Context appContext){
 		SharedPreferences data = PreferenceManager.getDefaultSharedPreferences(appContext);				
 		System.out.println("Deleting saves one by one...");
 		SharedPreferences.Editor editor = data.edit();
 		for (int i=0;i<NUMBER_OF_SAVES;i++){
+			File dir = appContext.getDir(data.getString(SAVE_NAME+i,"EMPTY"),Context.MODE_PRIVATE);
+			dir.delete();
 			editor.remove(SAVE_NAME+i);
 		}		
 		editor.commit();

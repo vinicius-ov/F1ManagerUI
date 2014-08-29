@@ -116,6 +116,10 @@
             android:name="com.digitreko.ui.f1managerui.LoadGameActivity"
             android:label="@string/title_activity_load_game" >
         </activity>
+        <activity
+            android:name="com.digitreko.ui.f1managerui.RaceActivity"
+            android:label="@string/title_activity_race" >
+        </activity>
     </application>
 
 </manifest>

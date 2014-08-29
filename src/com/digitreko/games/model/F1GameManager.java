@@ -51,7 +51,7 @@ public class F1GameManager implements Serializable {
 
 
 
-	public Track getTrack(int currentRace) throws Exception{
+	public Track getTrack(int currentRace){
 		Track pista = null;
 		switch (currentRace){
 		
@@ -222,7 +222,8 @@ public class F1GameManager implements Serializable {
 				(new int[]{2,7}),(new int[]{2,8}),
 				(new int[]{2,8}),(new int[]{2,5}));
 		break;
-		case 19:
+		//case 19:
+		default:
 		pista = new Track("United Arab Emirates",
 				"1Yas_Marina_Abu_Dhabi_compact.jpg",
 				(new int[]{2,6}),(new int[]{2,5}),
@@ -231,10 +232,7 @@ public class F1GameManager implements Serializable {
 				(new int[]{2,3}),(new int[]{2,6}),
 				(new int[]{2,7}),(new int[]{2,7}));
 
-		break;
-		default:
-			throw new Exception("Invalid track index.");
-
+		break;	
 		}
 		return pista;
 	}
@@ -354,18 +352,18 @@ public class F1GameManager implements Serializable {
 
 		//case t0 decide which team was selected
 		//in case of custom create team with data and add to array
-		Team redBullRacing = new Team(Codes.teamAndCarCodes.RBR1);
-		Team mcLaren = new Team(Codes.teamAndCarCodes.MCL1);
-		Team ferrari =  new Team(Codes.teamAndCarCodes.FER1);
-		Team lotus =  new Team(Codes.teamAndCarCodes.LOT1);
-		Team mercedes =  new Team(Codes.teamAndCarCodes.MER1);
-		Team sauber =  new Team(Codes.teamAndCarCodes.SAU1);
-		Team forceIndia =  new Team(Codes.teamAndCarCodes.FOR1);
-		Team willians =  new Team(Codes.teamAndCarCodes.WIL1);
-		Team toroRosso =  new Team(Codes.teamAndCarCodes.TOR1);
-		Team caterhan =  new Team(Codes.teamAndCarCodes.CAT1);
+		Team redBullRacing = new Team(CodesAndConstants.teamAndCarCodes.RBR1);
+		Team mcLaren = new Team(CodesAndConstants.teamAndCarCodes.MCL1);
+		Team ferrari =  new Team(CodesAndConstants.teamAndCarCodes.FER1);
+		Team lotus =  new Team(CodesAndConstants.teamAndCarCodes.LOT1);
+		Team mercedes =  new Team(CodesAndConstants.teamAndCarCodes.MER1);
+		Team sauber =  new Team(CodesAndConstants.teamAndCarCodes.SAU1);
+		Team forceIndia =  new Team(CodesAndConstants.teamAndCarCodes.FOR1);
+		Team willians =  new Team(CodesAndConstants.teamAndCarCodes.WIL1);
+		Team toroRosso =  new Team(CodesAndConstants.teamAndCarCodes.TOR1);
+		Team caterhan =  new Team(CodesAndConstants.teamAndCarCodes.CAT1);
 
-		Team marussia =  new Team(Codes.teamAndCarCodes.MAR1);
+		Team marussia =  new Team(CodesAndConstants.teamAndCarCodes.MAR1);
 		
 		
 

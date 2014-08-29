@@ -31,7 +31,7 @@ public class Pilot implements Serializable{
 		
 	}
 	
-	public Pilot(Codes.pilotCodes code){
+	public Pilot(CodesAndConstants.pilotCodes code){
     	outcomeAccumulator = 0;
 		age = 20;
     	reputation = 50; 
@@ -41,80 +41,80 @@ public class Pilot implements Serializable{
     	
         switch (code){
             case Vettel:{
-            	name = "Sebastian Vettel";
+            	name = CodesAndConstants.pilotNames.Vettel.toString();
             	skill = 80;
             	fileName = "vettel.png";
 
             }
             break;
             case Webber:{
-            	name = "Mark Webber";
+            	name = CodesAndConstants.pilotNames.Webber.toString();
             	skill = 77;
             	fileName = "webber.jpg";
             }
                 break;
             case Alonso:{
-            	name 	= "Fernando Alonso";
+            	name 	= CodesAndConstants.pilotNames.Alonso.toString();
             	skill 	= 80; 
             	fileName = "alonso.jpg";
             }
             break;    
             case Massa:{
-            	name 	= "Felipe Massa";
+            	name 	= CodesAndConstants.pilotNames.Massa.toString();
             	skill 	= 72; 
             	fileName = "massa.png";
             }
             break;
             case Button:{
-            	name 	= "Jason Button";
+            	name 	= CodesAndConstants.pilotNames.Button.toString();
             	skill 	= 78; 
             	fileName = "button.jpg";
             }
             break;
             case Perez:{
-            	name 	= "Sergio Perez";
+            	name 	= CodesAndConstants.pilotNames.Perez.toString();
             	skill 	= 60; 
             	fileName = "perez.jpg";
             }
             break;           
             case Raikkonen:{
-            	name 	= "Kimi Raikkonen";
+            	name 	= CodesAndConstants.pilotNames.Raikonnen.toString();
             	skill 	= 79; 
             	fileName = "raikkonen.jpg";
             }
             break;
             case Grosjean:{
-            	name 	= "Romain Grosjean";
+            	name 	= CodesAndConstants.pilotNames.Grosjean.toString();
             	skill 	= 75; 
             	fileName = "grosjean.png";
             }
             break;
             case Rosberg:{
-            	name 	= "Nico Rosberg";
+            	name 	= CodesAndConstants.pilotNames.Rosberg.toString();
             	skill 	= 74; 
             	fileName = "rosberg.png";
             }
             break;
             case Hamilton:{
-            	name 	= "Lewis Hamilton";
+            	name 	= CodesAndConstants.pilotNames.Hamilton.toString();
             	skill 	= 79; 
             	fileName = "hamilton.jpg";
             }
             break;
             case Hulkenberg:{
-            	name 	= "Nico Hulkenberg";
+            	name 	= CodesAndConstants.pilotNames.Hulkenberg.toString();
             	skill 	= 65; 
             	fileName = "hulkenberg.jpg";
             }
             break;
             case Gutierrez:{
-            	name 	= "Esteban Gutierrez";
+            	name 	= CodesAndConstants.pilotNames.Gutierrez.toString();
             	skill 	= 58; 
             	fileName = "gutierrez.jpg";
             }
             break;
             case Resta:{
-            	name 	= "Paul di Resta";
+            	name 	= CodesAndConstants.pilotNames.Resta.toString();
             	skill 	= 65; 
 
             	fileName = "di_resta.jpg";
@@ -122,55 +122,55 @@ public class Pilot implements Serializable{
             }
             break;
             case Sutil:{
-            	name 	= "Adrian Sutil";
+            	name 	= CodesAndConstants.pilotNames.Sutil.toString();
             	skill 	= 65; 
             	fileName = "sutil.png";
             }
             break;
             case Vergne:{
-            	name 	= "Jean-Eric Vergne";
+            	name 	= CodesAndConstants.pilotNames.Vergne.toString();
             	skill 	= 59; 
             	fileName = "vergne.jpg";
             }
             break;
             case Ricciardo:{
-            	name 	= "Daniel Ricciardo";
+            	name 	= CodesAndConstants.pilotNames.Ricciardo.toString();
             	skill 	= 59; 
             	fileName = "ricciardo.jpg";
             }
             break;
             case Pic:{
-            	name 	= "Charles Pic";
+            	name 	= CodesAndConstants.pilotNames.Pic.toString();
             	skill 	= 60; 
             	fileName = "pic.jpg";
             }
             break;
             case Garde:{
-            	name 	= "Giedo van der Garde";
+            	name 	= CodesAndConstants.pilotNames.Garde.toString();
             	skill 	= 65; 
             	fileName = "giedo.jpg";
             }
             break;
             case Maldonado:{
-            	name 	= "Pastor Maldonado";
+            	name 	= CodesAndConstants.pilotNames.Maldonado.toString();
             	skill 	= 65; 
             	fileName = "maldonado.jpg";
             }
             break;
             case Bottas:{
-            	name 	= "Valttere Bottas";
+            	name 	= CodesAndConstants.pilotNames.Bottas.toString();
             	skill 	= 60; 
             	fileName = "bottas.png";
             }
             break;
             case Bianchi:{
-            	name 	= "Jules Bianchi";
+            	name 	= CodesAndConstants.pilotNames.Bianchi.toString();
             	skill 	= 65; 
             	fileName = "bianchi.jpg";
             }
             break;
             case Chilton:{
-            	name 	= "Max Chilton";
+            	name 	= CodesAndConstants.pilotNames.Chilton.toString();
             	skill 	= 65; 
             	fileName = "chilton.png";
             }

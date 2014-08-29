@@ -14,8 +14,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -154,6 +156,8 @@ public class PilotsFragment extends Fragment {
     	
     	fundsText =  (TextView) rootView.findViewById(R.id.balancePilots);
     	fundsText.setText("Balance: "+String.valueOf(playerTeam.getFunds()));
+    	
+    	
     	
     }
     

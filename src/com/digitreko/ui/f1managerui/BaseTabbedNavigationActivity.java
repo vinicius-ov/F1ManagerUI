@@ -46,8 +46,8 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
  
         viewPager.setAdapter(mAdapter);
-        //actionBar.setHomeButtonEnabled(false); //stopped working after who knows
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);       
+        //actionBar.setHomeButtonEnabled(false); //stopped working after who knows        
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);       
         
         // Adding Tabs
         for (String tab_name : tabs) {
@@ -66,7 +66,7 @@ public class BaseTabbedNavigationActivity extends FragmentActivity implements
 
                 // make respected tab selected            	
 
-                //actionBar.setSelectedNavigationItem(position);
+                actionBar.setSelectedNavigationItem(position);
             }
  
             @Override

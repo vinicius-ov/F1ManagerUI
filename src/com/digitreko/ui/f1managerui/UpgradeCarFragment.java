@@ -27,7 +27,7 @@ import com.digitreko.games.model.Team;
 public class UpgradeCarFragment extends Fragment {
  
 	private final String LEVEL = "LVL ";
-	private final String BALANCE = "BALANCE: ";
+	private final String BALANCE = "Balance: ";
 	private final String UPGRADE_MESSAGE = "Confirm Upgrade: ";
 	private final String REPAIR_MESSAGE = "Confirm Repair: ";
 	

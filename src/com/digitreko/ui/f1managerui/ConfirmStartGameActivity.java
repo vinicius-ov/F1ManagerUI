@@ -94,7 +94,7 @@ public class ConfirmStartGameActivity extends Activity {
 				System.out.println("name of selected team: "+selectedTeam);
 				selectedTeam = selectedTeam.replace('_', ' ');
 				tvSelTeam.setText(selectedTeam);
-				godClass.setPlayerControlledTeam(selectedTeam);
+				
 				System.out.println("Player team: "+godClass.getPCTeam());
 			}
 		}
@@ -136,7 +136,8 @@ public class ConfirmStartGameActivity extends Activity {
     }
 
 	public void gotoStartGame(View view){
-    	System.out.println("Team: "+selectedTeam);    	
+    	System.out.println("Team: "+selectedTeam);
+    	godClass.setPlayerControlledTeam(selectedTeam);
     	//godClass.initializeTeams();	//to restart point co
 
     	//set application to start from beginning 

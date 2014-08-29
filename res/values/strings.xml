@@ -63,6 +63,11 @@
         <item>Mercedes</item>
         <item>Toro Rosso</item>
     </string-array>
+    <string-array name="tactics_array">
+        <item>Normal</item>
+        <item>Aggressive</item>
+        <item>Cautious</item>
+    </string-array>
 
     <string name="title_activity_confirm_start_game">Confirm Selections</string>
     <string name="title_activity_next_race">Next Race</string>
@@ -74,5 +79,8 @@
     <string name="title_activity_pilot_more_info">PilotMoreInfoActivity</string>
     <string name="title_activity_manager_fragment">ManagerFragment</string>
     <string name="title_activity_load_game">Load Game</string>
+    <string name="title_activity_race">Race</string>
+    <string name="pitstop_yes">PIT\nSTOP</string>
+    <string name="pitstop_no">PIT\nSTOP</string>
 
 </resources>

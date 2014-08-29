@@ -9,7 +9,7 @@
     tools:context=".SelectTeamActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/raceLaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -46,6 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:entries="@array/teams_array"
-        android:layout_below="@+id/textView1" />
+        android:layout_below="@+id/raceLaps" />
 
 </RelativeLayout>

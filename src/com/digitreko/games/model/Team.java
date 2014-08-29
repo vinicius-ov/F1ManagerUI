@@ -50,7 +50,7 @@ public class Team implements Serializable{
 		this.planners = planners;
 	}
 	
-	public Team(Codes.teamAndCarCodes code) {
+	public Team(CodesAndConstants.teamAndCarCodes code) {
 		//pilots = new Pilot[4];
 		//colors = new String[2];
 		sponsors = new ArrayList<Sponsor>();
@@ -62,7 +62,7 @@ public class Team implements Serializable{
 		
 		switch (code){
 		case RBR1:{
-			name = "Red Bull Racing";
+			name = CodesAndConstants.teamNames.Red_Bull_Racing.toString();
 			engine = "Renault";
 			engineers = 7;
 			planners = 7;
@@ -71,12 +71,12 @@ public class Team implements Serializable{
 			reputation = 70;
 			colors.add("White");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Vettel)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Webber)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Vettel)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Webber)));
 		}
 		break;
 		case MCL1:{
-			name = "McLaren";
+			name = CodesAndConstants.teamNames.McLaren.toString();
 			engine = "Mercedes";
 			engineers = 7;
 			planners = 6;
@@ -85,13 +85,13 @@ public class Team implements Serializable{
 			reputation = 70;
 			colors.add("White");
 			colors.add("Gold");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Button)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Resta)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Button)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Resta)));
 						
 		}
 		break;
 		case FER1:{
-			name = "Ferrari";
+			name = CodesAndConstants.teamNames.Ferrari.toString();
 			engine = "Ferrari";
 			engineers = 7;
 			planners = 8;
@@ -100,11 +100,11 @@ public class Team implements Serializable{
 			reputation = 70;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Alonso)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Raikkonen)));		}
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Alonso)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Raikkonen)));		}
 		break;
 		case LOT1:{
-			name = "Lotus";
+			name = CodesAndConstants.teamNames.Lotus.toString();
 			engine = "Mercedes";
 			engineers = 7;
 			planners = 8;
@@ -113,12 +113,12 @@ public class Team implements Serializable{
 			reputation = 70;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Maldonado)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Grosjean)));			
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Maldonado)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Grosjean)));			
 		}
 		break;
 		case MER1:{
-			name = "Mercedes";
+			name = CodesAndConstants.teamNames.Mercedes.toString();
 			engine = "Mercedes";
 			engineers = 7;
 			planners = 8;
@@ -127,12 +127,12 @@ public class Team implements Serializable{
 			reputation = 70;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Rosberg)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Hamilton)));			
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Rosberg)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Hamilton)));			
 		}
 		break;
 		case SAU1:{
-			name = "Sauber";
+			name = CodesAndConstants.teamNames.Sauber.toString();
 			engine = "Ferrari";
 			engineers = 7;
 			planners = 6;
@@ -141,12 +141,12 @@ public class Team implements Serializable{
 			reputation = 50;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Sutil)));		
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Gutierrez)));			
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Sutil)));		
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Gutierrez)));			
 		}
 		break;
 		case FOR1:{
-			name = "Force India";
+			name = CodesAndConstants.teamNames.Force_India.toString();
 			engine = "Mercedes";
 			engineers = 5;
 			planners = 6;
@@ -155,13 +155,13 @@ public class Team implements Serializable{
 			reputation = 50;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Perez)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Hulkenberg)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Perez)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Hulkenberg)));
 				
 		}
 		break;
 		case WIL1:{
-			name = "Williams";
+			name = CodesAndConstants.teamNames.Williams.toString();
 			engine = "Renault";
 			engineers = 9;
 			planners = 6;
@@ -170,12 +170,12 @@ public class Team implements Serializable{
 			reputation = 50;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Massa)));		
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Bottas)));			
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Massa)));		
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Bottas)));			
 		}
 		break;
 		case TOR1:{
-			name = "Toro Rosso";
+			name = CodesAndConstants.teamNames.Toro_Rosso.toString();
 			engine = "Ferrari";
 			engineers = 9;
 			planners = 6;
@@ -184,12 +184,12 @@ public class Team implements Serializable{
 			reputation = 50;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Vergne)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Ricciardo)));			
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Vergne)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Ricciardo)));			
 		}
 		break;
 		case CAT1:{
-			name = "Caterham";
+			name = CodesAndConstants.teamNames.Catherham.toString();
 			engine = "Renault";
 			engineers = 9;
 			planners = 6;
@@ -198,12 +198,12 @@ public class Team implements Serializable{
 			reputation = 50;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Pic)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Garde)));			
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Pic)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Garde)));			
 		}
 		break;
 		case MAR1:{
-			name = "Marussia";
+			name = CodesAndConstants.teamNames.Marussia.toString();
 			engine = "Cosworth";
 			engineers = 6;
 			planners = 6;
@@ -212,8 +212,8 @@ public class Team implements Serializable{
 			reputation = 50;
 			colors.add("Red");
 			colors.add("Black");
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Bianchi)));
-			cars.add(new RaceCar(code,new Pilot(Codes.pilotCodes.Chilton)));			
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Bianchi)));
+			cars.add(new RaceCar(code,new Pilot(CodesAndConstants.pilotCodes.Chilton)));			
 		}
 		break;
 		default:{	//DEFAULT DEVE CRIAR O CUSTOM TEAM?? DEVE DIFERENCIAR VALIDOS DE INVALIDOS

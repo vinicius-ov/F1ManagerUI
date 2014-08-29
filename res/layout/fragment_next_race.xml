@@ -12,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/creditsBtn"
+        android:id="@+id/beginRace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -42,12 +42,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/textViewCountryName"
-        android:scaleType="center"
+        android:scaleType="fitXY"
         android:src="@drawable/australia_track" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/raceLaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -59,9 +60,9 @@
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/creditsBtn"
+        android:layout_above="@+id/beginRace"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1" >
+        android:layout_below="@+id/raceLaps" >
 
         <ListView
             android:id="@+id/listPilotStandings"
@@ -90,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/raceMap"
         android:layout_alignParentRight="true"
-        android:src="@drawable/car1" />
+        android:src="@drawable/cloudy" />
 
     <TextView
         android:id="@+id/TextView01"

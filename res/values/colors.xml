@@ -1,5 +1,7 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
+    <color name="black_menu_item">#FFFFFFFF</color>
+    <color name="white_menu">#00000000</color>
 
 </resources>

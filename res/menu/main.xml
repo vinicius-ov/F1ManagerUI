@@ -19,5 +19,12 @@
         android:showAsAction="ifRoom"
         android:icon="@drawable/save"
         android:title="Save Game"/>
+    <item
+        android:id="@+id/action_help_manager"
+        android:orderInCategory="220"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/save"
+        android:title="Help"/>
+    
     
 </menu>

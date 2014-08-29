@@ -18,6 +18,17 @@ import com.digitreko.f1manager.R;
 import com.digitreko.games.model.F1GameManager;
 import com.digitreko.games.model.Team;
  
+/**
+ * TeamFragment.java
+ * 
+ * View containing all data relative to team selected by the player.
+ * This screen have the buttons for upgrade team stats, to check mail
+ * and news. 
+ * 
+ * @author Vinicius
+ * 
+ *
+ */
 public class TeamFragment extends Fragment {
  
 
@@ -27,8 +38,8 @@ public class TeamFragment extends Fragment {
 	private final String ENGINEER_LEVEL = "Engineering Level ";
 	private final String BALANCE = "Current Balance: ";
 	
-	F1GameManager godClass;    	
-	Team playerTeam;
+	private F1GameManager godClass;    	
+	private Team playerTeam;
 	private TextView textEngineers;
 	private TextView textMoney;
 	private Button trainEngineers;
@@ -39,6 +50,8 @@ public class TeamFragment extends Fragment {
 	private TextView textRandD;
 	private TextView textPlanners;
 	private TextView textProjected;
+	private TextView balanceSmall;
+	
 	
 
     @Override
@@ -56,10 +69,12 @@ public class TeamFragment extends Fragment {
         return rootView;
     }
  
-    public void fillTeamData(View rootView){
-
-    	
-    	
+    /**
+     * Fill the fields in the view.
+     * 
+     * @param rootView
+     */
+    public void fillTeamData(View rootView){    	
     	TextView textName = (TextView) rootView.findViewById(R.id.teamNameTeam);    	
     	TextView textEngine = (TextView) rootView.findViewById(R.id.textEngineTeam);
     	TextView textPoints = (TextView) rootView.findViewById(R.id.constructorPointsTeam);
@@ -95,6 +110,9 @@ public class TeamFragment extends Fragment {
     	
     	textFansCount.setText("Fans Count: "+String.valueOf(playerTeam.getFanCount()));
     	textReputation.setText("Reputation: "+String.valueOf(playerTeam.getReputation()));
+    	
+    	balanceSmall = (TextView) rootView.findViewById(R.id.teamBalanceTeamSmall);
+    	balanceSmall.setText(BALANCE.split(" ")[1]+String.valueOf(playerTeam.getFunds()));
 
     	trainEngineers = (Button) rootView.findViewById(R.id.trainEngineers);
     	trainEngineers.setEnabled(!playerTeam.isEngineersMaxLevel());
@@ -157,6 +175,10 @@ public class TeamFragment extends Fragment {
     	
     }
     
+    /**
+     * Alert for upgrading engineers.
+     * @param view
+     */
     public void popAlertUpgradeEngineers(View view){
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     	final int costToUpgrade = playerTeam.getUpgradeEngineerCost();
@@ -170,6 +192,7 @@ public class TeamFragment extends Fragment {
 	    	           	   textMoney.setText(BALANCE+playerTeam.getFunds());
 	    	           	   textProjected.setText("Project Balance (End of Season): "+playerTeam.getProjectedBalance());
 	    	           	   trainEngineers.setEnabled(!playerTeam.isEngineersMaxLevel());
+	    	   	           balanceSmall.setText("Balance:"+playerTeam.getFunds());
 	    	           	   playerTeam.getFinances().setImprovementExpense(playerTeam.getFinances().getImprovementExpense()+costToUpgrade);
     	               }else{
     	            	   Toast.makeText(getView().getContext(), "Not enough funds!", Toast.LENGTH_LONG).show();
@@ -188,6 +211,12 @@ public class TeamFragment extends Fragment {
     	dialog.setTitle(UPGRADE_MESSAGE+"'Engineers'?\n" + "Cost: "+costToUpgrade);
     	dialog.show();
     }
+    
+    /**
+     * Alert for upgrading race planners.
+     * 
+     * @param view
+     */
     public void popAlertUpgradePlanners(View view){
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     	final int costToUpgrade = playerTeam.getUpgradePlannerCost();
@@ -201,6 +230,7 @@ public class TeamFragment extends Fragment {
 	    	           	   textMoney.setText(BALANCE+playerTeam.getFunds());
 	    	           	   trainPlanners.setEnabled(!playerTeam.isPlannersMaxLevel());
 	    	           	   textProjected.setText("Project Balance (End of Season): "+playerTeam.getProjectedBalance());
+	    	   	           balanceSmall.setText("Balance:"+playerTeam.getFunds());
 	    	           	   playerTeam.getFinances().setImprovementExpense(playerTeam.getFinances().getImprovementExpense()+costToUpgrade);
     	               }else{
     	            	   Toast.makeText(getView().getContext(), "Not enough funds!", Toast.LENGTH_LONG).show();
@@ -218,6 +248,12 @@ public class TeamFragment extends Fragment {
     	dialog.setTitle(UPGRADE_MESSAGE+"'Planners'?\n" + "Cost: "+costToUpgrade);
     	dialog.show();
     }
+    
+    /**
+     * Alert for upgrading R&D
+     * 
+     * @param view
+     */
     public void popAlertUpgradeRandD(View view){
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     	final int costToUpgrade = playerTeam.getUpgradeRandDCost();
@@ -231,6 +267,7 @@ public class TeamFragment extends Fragment {
 	    	           	   textMoney.setText(BALANCE+playerTeam.getFunds());
 		    	           trainRandD.setEnabled(!playerTeam.isRandDMaxLevel());
 		    	           textProjected.setText("Project Balance (End of Season): "+playerTeam.getProjectedBalance());
+		    	           balanceSmall.setText("Balance:"+playerTeam.getFunds());
 		    	           playerTeam.getFinances().setImprovementExpense(playerTeam.getFinances().getImprovementExpense()+costToUpgrade);
     	               }else{
     	            	   Toast.makeText(getView().getContext(), "Not enough funds!", Toast.LENGTH_LONG).show();

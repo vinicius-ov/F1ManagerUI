@@ -15,7 +15,7 @@ public class Manager implements Serializable{
 	
 	
 	public Manager(){
-		
+		yearsInCommand = 0;
 	}
 	
 	public String getName() {

@@ -30,12 +30,12 @@ public class RaceCar implements Serializable{
 	private CarPart tires;
 	private int currentSection;
 	private boolean sectionStatus;
-	//private Codes.teamAndCarCodes teamCode;
+	//private CodesAndConstants.teamAndCarCodes teamCode;
 	private Pilot driver;
 	private boolean retired;
 	private int gas;
 
-	public RaceCar(Codes.teamAndCarCodes code, Pilot driver){
+	public RaceCar(CodesAndConstants.teamAndCarCodes code, Pilot driver){
 		int value = 1;
 		//teamCode = code;
 		switch (code){
