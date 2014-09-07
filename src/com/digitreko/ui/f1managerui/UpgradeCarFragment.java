@@ -3,17 +3,23 @@ package com.digitreko.ui.f1managerui;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +61,8 @@ public class UpgradeCarFragment extends Fragment {
 	Button repairBrakes;
 	Button repairEngine;
 	Button repairAerodynamics;
+	View rootView;
+	int carIndex;
 	
 	public interface OnRefreshListener {
 	    public void onRefresh();
@@ -64,7 +72,7 @@ public class UpgradeCarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
     	
-    	View rootView = inflater.inflate(R.layout.fragment_race_car, container, false);
+    	rootView = inflater.inflate(R.layout.fragment_race_car, container, false);
     	
     	godClass = F1GameManager.getInstance();
     	pcTeam = godClass.getPCTeam();   	    	
@@ -104,11 +112,7 @@ public class UpgradeCarFragment extends Fragment {
             	popAlertUpgradeAerodynamics(v);            	
             }
         });
-        upgradeTires.setEnabled(!pcTeam.getCars().get(0).getTires().isMaxLevel());
-        upgradeSuspension.setEnabled(!pcTeam.getCars().get(0).getSuspension().isMaxLevel());
-        upgradeBrakes.setEnabled(!pcTeam.getCars().get(0).getBrakes().isMaxLevel());
-        upgradeEngine.setEnabled(!pcTeam.getCars().get(0).getEngine().isMaxLevel());
-        upgradeAerodynamics.setEnabled(!pcTeam.getCars().get(0).getAerodynamics().isMaxLevel());
+        checkUpgradeEnabledButtons();
         
         repairTires = (Button) rootView.findViewById(R.id.repairTires);
         repairTires.setOnClickListener(new View.OnClickListener() {       
@@ -149,34 +153,64 @@ public class UpgradeCarFragment extends Fragment {
             	popAlertRepairAerodynamics(v);            	
             }
         });
-        repairTires.setEnabled(!pcTeam.getCars().get(0).getTires().isMaxCondition());
-        repairSuspension.setEnabled(!pcTeam.getCars().get(0).getSuspension().isMaxCondition());
-        repairBrakes.setEnabled(!pcTeam.getCars().get(0).getBrakes().isMaxCondition());
-        repairEngine.setEnabled(!pcTeam.getCars().get(0).getEngine().isMaxCondition());
-        repairAerodynamics.setEnabled(!pcTeam.getCars().get(0).getAerodynamics().isMaxCondition());
+        checkRepairEnabledButtons();
+        
 
-
-        fillFields(rootView);
-        return rootView;
-    }
-    
-    private void fillFields(View rootView){
-    	
-    	int funds = pcTeam.getFunds();
-    	
-    	
-    	InputStream is = null;
+        InputStream is = null;
     	try {
 			is = getActivity().getAssets().open("car_top_view2.jpg");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}    	
+		}
+    	ImageView iv = (ImageView) rootView.findViewById(R.id.raceCarUpgrade);
+    	iv.setImageBitmap(BitmapFactory.decodeStream(is));
+    	
+    	ArrayList<String> entries = new ArrayList<String>();
+    	String name= pcTeam.getCars().get(0).getDriver().getName()+" - Car #0";
+    	entries.add(name);
+    	name= pcTeam.getCars().get(1).getDriver().getName()+" - Car #1";
+    	entries.add(name);
+    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, entries);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinCars = (Spinner) rootView.findViewById(R.id.spinnerDriverCar);
+        spinCars.setAdapter(adapter);
+    	spinCars.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				// TODO Auto-generated method stub
+				carIndex = position;
+				fillFields(rootView);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
+        fillFields(rootView);
+        
+        return rootView;
+    }
+    
+    
+
+	private void fillFields(View rootView){
+    	
+    	int funds = pcTeam.getFunds();
+    	Log.w("DEBUG","Indice: "+carIndex);
+    	
+    	    	
     	
     	//os dois carros do time sao iguis entao pode pegar qualquer 1
     	//na hora do update fazer um foreach na lista de carros
     	//o dummy
-    	RaceCar dummy = pcTeam.getCars().get(0);
+    	RaceCar dummy = pcTeam.getCars().get(carIndex);
+    	
     	brakesLevel =  (TextView) rootView.findViewById(R.id.brakesLevel);
     	brakesLevel.setText(LEVEL+dummy.getBrakes().getPower());
 
@@ -193,7 +227,7 @@ public class UpgradeCarFragment extends Fragment {
     	suspensionLevel.setText(LEVEL+dummy.getSuspension().getPower());
     	
     	fundsText =  (TextView) rootView.findViewById(R.id.playerCashToUpgrade);
-    	fundsText.setText("BALANCE: "+String.valueOf(funds));
+    	fundsText.setText(BALANCE+String.valueOf(funds));
     	
     	brakesCondition = (TextView) rootView.findViewById(R.id.brakesCondition);
     	brakesCondition.setText(String.valueOf((int)dummy.getBrakes().getCondition()));
@@ -210,28 +244,24 @@ public class UpgradeCarFragment extends Fragment {
     	engineCondition= (TextView) rootView.findViewById(R.id.engineCondition);
     	engineCondition.setText(String.valueOf((int)dummy.getEngine().getCondition()));
     	
-    	ImageView iv = (ImageView) rootView.findViewById(R.id.raceCarUpgrade);
-    	iv.setImageBitmap(BitmapFactory.decodeStream(is));
-    	//iv.setScaleType(ScaleType.FIT_END);
+    	checkUpgradeEnabledButtons();
+    	checkRepairEnabledButtons();
     	
     }
     
     
     public void popAlertUpgradeTires(View view){
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    	final int costToUpgrade = pcTeam.getCars().get(0).getTires().costToUpgrade();
+    	final int costToUpgrade = pcTeam.getCars().get(carIndex).getTires().costToUpgrade();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {    		
     	           public void onClick(DialogInterface dialog, int id) {
-    	        	   
     	               if (pcTeam.getFunds() >= costToUpgrade){
-	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToUpgrade);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getTires().setPower(car.getTires().getPower()+1);
-	    	        	   }    	        	   
-	    	        	   tiresLevel.setText(LEVEL+pcTeam.getCars().get(0).getTires().getPower());
+	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToUpgrade);	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getTires().setPower(pcTeam.getCars().get(carIndex).getTires().getPower()+1);	    	        	   
+	    	        	   tiresLevel.setText(LEVEL+pcTeam.getCars().get(carIndex).getTires().getPower());
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   upgradeTires.setEnabled(!pcTeam.getCars().get(0).getTires().isMaxLevel());
+	    	           	   upgradeTires.setEnabled(!pcTeam.getCars().get(carIndex).getTires().isMaxLevel());
 	    	               pcTeam.getFinances().setImprovementExpense(pcTeam.getFinances().getImprovementExpense()+costToUpgrade);
 	    	               FinanceFragment.updateImprovementExpense(pcTeam.getFinances().getImprovementExpense());
     	               }else{
@@ -253,18 +283,18 @@ public class UpgradeCarFragment extends Fragment {
     }
     public void popAlertUpgradeBrakes(View view){
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    	final int costToUpgrade = pcTeam.getCars().get(0).getBrakes().costToUpgrade();
+    	final int costToUpgrade = pcTeam.getCars().get(carIndex).getBrakes().costToUpgrade();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToUpgrade){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToUpgrade);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getBrakes().setPower(car.getBrakes().getPower()+1);
-	    	        	   }    	        	   
-	    	        	   brakesLevel.setText(LEVEL+pcTeam.getCars().get(0).getBrakes().getPower());
+	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getBrakes().setPower(pcTeam.getCars().get(carIndex).getBrakes().getPower()+1);
+	    	        	       	        	   
+	    	        	   brakesLevel.setText(LEVEL+pcTeam.getCars().get(carIndex).getBrakes().getPower());
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   upgradeBrakes.setEnabled(!pcTeam.getCars().get(0).getBrakes().isMaxLevel());	
+	    	           	   upgradeBrakes.setEnabled(!pcTeam.getCars().get(carIndex).getBrakes().isMaxLevel());	
 	    	               pcTeam.getFinances().setImprovementExpense(pcTeam.getFinances().getImprovementExpense()+costToUpgrade);
 	    	               FinanceFragment.updateImprovementExpense(pcTeam.getFinances().getImprovementExpense());
     	               }else{
@@ -289,18 +319,18 @@ public class UpgradeCarFragment extends Fragment {
     public void popAlertUpgradeAerodynamics(View view){
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     	
-    	final int costToUpgrade = pcTeam.getCars().get(0).getAerodynamics().costToUpgrade();
+    	final int costToUpgrade = pcTeam.getCars().get(carIndex).getAerodynamics().costToUpgrade();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToUpgrade){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToUpgrade);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getAerodynamics().setPower(car.getAerodynamics().getPower()+1);
-	    	        	   }    	        	   
-	    	        	   aerodynamicsLevel.setText(LEVEL+pcTeam.getCars().get(0).getAerodynamics().getPower());
+	    	     
+	    	        	   pcTeam.getCars().get(carIndex).getAerodynamics().setPower(pcTeam.getCars().get(carIndex).getAerodynamics().getPower()+1);
+	    	         	        	   
+	    	        	   aerodynamicsLevel.setText(LEVEL+pcTeam.getCars().get(carIndex).getAerodynamics().getPower());
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   upgradeAerodynamics.setEnabled(!pcTeam.getCars().get(0).getAerodynamics().isMaxLevel());
+	    	           	   upgradeAerodynamics.setEnabled(!pcTeam.getCars().get(carIndex).getAerodynamics().isMaxLevel());
 	    	               pcTeam.getFinances().setImprovementExpense(pcTeam.getFinances().getImprovementExpense()+costToUpgrade);
 	    	               FinanceFragment.updateImprovementExpense(pcTeam.getFinances().getImprovementExpense());
     	               }else{
@@ -329,12 +359,12 @@ public class UpgradeCarFragment extends Fragment {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToUpgrade){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToUpgrade);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getSuspension().setPower(car.getSuspension().getPower()+1);
-	    	        	   }    	        	   
-	    	        	   suspensionLevel.setText(LEVEL+pcTeam.getCars().get(0).getSuspension().getPower());
+	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getSuspension().setPower(pcTeam.getCars().get(carIndex).getSuspension().getPower()+1);
+	    	        	       	        	   
+	    	        	   suspensionLevel.setText(LEVEL+pcTeam.getCars().get(carIndex).getSuspension().getPower());
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   upgradeSuspension.setEnabled(!pcTeam.getCars().get(0).getSuspension().isMaxLevel());
+	    	           	   upgradeSuspension.setEnabled(!pcTeam.getCars().get(carIndex).getSuspension().isMaxLevel());
 	    	               pcTeam.getFinances().setImprovementExpense(pcTeam.getFinances().getImprovementExpense()+costToUpgrade);
 	    	               FinanceFragment.updateImprovementExpense(pcTeam.getFinances().getImprovementExpense());
     	               }else{
@@ -356,18 +386,18 @@ public class UpgradeCarFragment extends Fragment {
     }
     public void popAlertUpgradeEngine(View view){
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    	final int costToUpgrade = pcTeam.getCars().get(0).getEngine().costToUpgrade();
+    	final int costToUpgrade = pcTeam.getCars().get(carIndex).getEngine().costToUpgrade();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToUpgrade){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToUpgrade);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getEngine().setPower(car.getEngine().getPower()+1);
-	    	        	   }    	        	   
-	    	        	   engineLevel.setText(LEVEL+pcTeam.getCars().get(0).getEngine().getPower());
+	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getEngine().setPower(pcTeam.getCars().get(carIndex).getEngine().getPower()+1);
+	    	        	       	        	   
+	    	        	   engineLevel.setText(LEVEL+pcTeam.getCars().get(carIndex).getEngine().getPower());
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   upgradeEngine.setEnabled(!pcTeam.getCars().get(0).getEngine().isMaxLevel());
+	    	           	   upgradeEngine.setEnabled(!pcTeam.getCars().get(carIndex).getEngine().isMaxLevel());
 	    	               pcTeam.getFinances().setImprovementExpense(pcTeam.getFinances().getImprovementExpense()+costToUpgrade);
 	    	               FinanceFragment.updateImprovementExpense(pcTeam.getFinances().getImprovementExpense());
     	               }else{
@@ -390,18 +420,18 @@ public class UpgradeCarFragment extends Fragment {
     
     private void popAlertRepairSuspension(View v) {
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    	final int costToRepair = pcTeam.getCars().get(0).getSuspension().costToRepair();
+    	final int costToRepair = pcTeam.getCars().get(carIndex).getSuspension().costToRepair();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToRepair){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToRepair);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getSuspension().setCondition(CarPart.getMaxcondition());
-	    	        	   }    	        	   
-	    	        	   suspensionCondition.setText(String.valueOf((int)pcTeam.getCars().get(0).getSuspension().getCondition()));
+	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getSuspension().setCondition(CarPart.getMaxcondition());
+	    	        	      	        	   
+	    	        	   suspensionCondition.setText(String.valueOf((int)pcTeam.getCars().get(carIndex).getSuspension().getCondition()));
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	repairSuspension.setEnabled(!pcTeam.getCars().get(0).getSuspension().isMaxCondition());
+	    	           	repairSuspension.setEnabled(!pcTeam.getCars().get(carIndex).getSuspension().isMaxCondition());
 	    	               pcTeam.getFinances().setRepairsExpense(pcTeam.getFinances().getRepairsExpense()+costToRepair);
 	    	               FinanceFragment.updateRepairExpense(pcTeam.getFinances().getRepairsExpense());
     	               }else{
@@ -424,18 +454,18 @@ public class UpgradeCarFragment extends Fragment {
     
     private void popAlertRepairTires(View v) {
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    	final int costToRepair = pcTeam.getCars().get(0).getTires().costToRepair();
+    	final int costToRepair = pcTeam.getCars().get(carIndex).getTires().costToRepair();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToRepair){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToRepair);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getTires().setCondition(CarPart.getMaxcondition());
-	    	        	   }    	        	   
-	    	        	   tiresCondition.setText(String.valueOf((int)pcTeam.getCars().get(0).getTires().getCondition()));
+	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getTires().setCondition(CarPart.getMaxcondition());
+    	        	   
+	    	        	   tiresCondition.setText(String.valueOf((int)pcTeam.getCars().get(carIndex).getTires().getCondition()));
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   repairTires.setEnabled(!pcTeam.getCars().get(0).getTires().isMaxCondition());
+	    	           	   repairTires.setEnabled(!pcTeam.getCars().get(carIndex).getTires().isMaxCondition());
 	    	               pcTeam.getFinances().setRepairsExpense(pcTeam.getFinances().getRepairsExpense()+costToRepair);
 	    	               FinanceFragment.updateRepairExpense(pcTeam.getFinances().getRepairsExpense());
     	               }else{
@@ -458,18 +488,18 @@ public class UpgradeCarFragment extends Fragment {
  
     private void popAlertRepairEngine(View v) {
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    	final int costToRepair = pcTeam.getCars().get(0).getEngine().costToRepair();
+    	final int costToRepair = pcTeam.getCars().get(carIndex).getEngine().costToRepair();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToRepair){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToRepair);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getEngine().setCondition(CarPart.getMaxcondition());
-	    	        	   }    	        	   
-	    	        	   engineCondition.setText(String.valueOf((int)pcTeam.getCars().get(0).getEngine().getCondition()));
+	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getEngine().setCondition(CarPart.getMaxcondition());
+	    	        	       	        	   
+	    	        	   engineCondition.setText(String.valueOf((int)pcTeam.getCars().get(carIndex).getEngine().getCondition()));
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   repairEngine.setEnabled(!pcTeam.getCars().get(0).getEngine().isMaxCondition());
+	    	           	   repairEngine.setEnabled(!pcTeam.getCars().get(carIndex).getEngine().isMaxCondition());
 	    	               pcTeam.getFinances().setRepairsExpense(pcTeam.getFinances().getRepairsExpense()+costToRepair);
 	    	               FinanceFragment.updateRepairExpense(pcTeam.getFinances().getRepairsExpense());
     	               }else{
@@ -492,18 +522,18 @@ public class UpgradeCarFragment extends Fragment {
     
     private void popAlertRepairAerodynamics(View v) {
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    	final int costToRepair = pcTeam.getCars().get(0).getAerodynamics().costToRepair();
+    	final int costToRepair = pcTeam.getCars().get(carIndex).getAerodynamics().costToRepair();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToRepair){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToRepair);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getAerodynamics().setCondition(CarPart.getMaxcondition());
-	    	        	   }    	        	   
-	    	        	   aerodynamicsCondition.setText(String.valueOf((int)pcTeam.getCars().get(0).getAerodynamics().getCondition()));
+	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getAerodynamics().setCondition(CarPart.getMaxcondition());
+	    	        	       	        	   
+	    	        	   aerodynamicsCondition.setText(String.valueOf((int)pcTeam.getCars().get(carIndex).getAerodynamics().getCondition()));
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   repairAerodynamics.setEnabled(!pcTeam.getCars().get(0).getAerodynamics().isMaxCondition());
+	    	           	   repairAerodynamics.setEnabled(!pcTeam.getCars().get(carIndex).getAerodynamics().isMaxCondition());
 	    	               pcTeam.getFinances().setRepairsExpense(pcTeam.getFinances().getRepairsExpense()+costToRepair);
 	    	               FinanceFragment.updateRepairExpense(pcTeam.getFinances().getRepairsExpense());
     	               }else{
@@ -526,18 +556,18 @@ public class UpgradeCarFragment extends Fragment {
     
     private void popAlertRepairBrakes(View v) {
     	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    	final int costToRepair = pcTeam.getCars().get(0).getBrakes().costToRepair();
+    	final int costToRepair = pcTeam.getCars().get(carIndex).getBrakes().costToRepair();
     	// Add the buttons
     	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	               if (pcTeam.getFunds() >= costToRepair){
 	    	        	   pcTeam.setFunds(pcTeam.getFunds()-costToRepair);
-	    	        	   for (RaceCar car:pcTeam.getCars()){
-	    	        		   car.getBrakes().setCondition(CarPart.getMaxcondition());
-	    	        	   }    	        	   
-	    	        	   brakesCondition.setText(String.valueOf((int)pcTeam.getCars().get(0).getBrakes().getCondition()));
+	    	        	   
+	    	        	   pcTeam.getCars().get(carIndex).getBrakes().setCondition(CarPart.getMaxcondition());
+	    	        	      	        	   
+	    	        	   brakesCondition.setText(String.valueOf((int)pcTeam.getCars().get(carIndex).getBrakes().getCondition()));
 	    	           	   fundsText.setText(BALANCE+pcTeam.getFunds());
-	    	           	   repairBrakes.setEnabled(!pcTeam.getCars().get(0).getBrakes().isMaxCondition());
+	    	           	   repairBrakes.setEnabled(!pcTeam.getCars().get(carIndex).getBrakes().isMaxCondition());
 	    	               pcTeam.getFinances().setRepairsExpense(pcTeam.getFinances().getRepairsExpense()+costToRepair);
 	    	               FinanceFragment.updateRepairExpense(pcTeam.getFinances().getRepairsExpense());
     	               }else{
@@ -555,6 +585,21 @@ public class UpgradeCarFragment extends Fragment {
     	AlertDialog dialog = builder.create();
     	dialog.setTitle(REPAIR_MESSAGE+"'Brakes'? " + "Cost: "+costToRepair);
     	dialog.show();	
+	}
+    
+    private void checkUpgradeEnabledButtons(){
+    	upgradeTires.setEnabled		  (!pcTeam.getCars().get(carIndex).getTires().isMaxLevel());
+        upgradeSuspension.setEnabled  (!pcTeam.getCars().get(carIndex).getSuspension().isMaxLevel());
+        upgradeBrakes.setEnabled	  (!pcTeam.getCars().get(carIndex).getBrakes().isMaxLevel());
+        upgradeEngine.setEnabled	  (!pcTeam.getCars().get(carIndex).getEngine().isMaxLevel());
+        upgradeAerodynamics.setEnabled(!pcTeam.getCars().get(carIndex).getAerodynamics().isMaxLevel());
+    }
+    private void checkRepairEnabledButtons() {
+    	repairTires.setEnabled		 (!pcTeam.getCars().get(carIndex).getTires().isMaxCondition());
+        repairSuspension.setEnabled  (!pcTeam.getCars().get(carIndex).getSuspension().isMaxCondition());
+        repairBrakes.setEnabled		 (!pcTeam.getCars().get(carIndex).getBrakes().isMaxCondition());
+        repairEngine.setEnabled		 (!pcTeam.getCars().get(carIndex).getEngine().isMaxCondition());
+        repairAerodynamics.setEnabled(!pcTeam.getCars().get(carIndex).getAerodynamics().isMaxCondition());
 	}
     
 }

@@ -432,8 +432,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/race_racemap"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="15dp"
-        android:src="@drawable/semar1" />
+        android:layout_marginBottom="11dp"
+        android:layout_toLeftOf="@+id/racePilotName1"
+        android:src="@drawable/green_sem" />
 
 </RelativeLayout>

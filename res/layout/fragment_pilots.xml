@@ -8,17 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".TeamFragment" >
 
-    <ImageView
-        android:id="@+id/pilotPic1"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="14dp"
-
-        android:adjustViewBounds="true"/>
-
 
     <TextView
         android:id="@+id/pilotName1"
@@ -169,15 +158,6 @@
         android:text="Age: 50" />
 
     <Button
-        android:id="@+id/trainPilot1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/skill1"
-        android:text="Train Pilot" />
-
-    <Button
         android:id="@+id/trainPilot2"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -195,5 +175,22 @@
         android:text="Balance: 1000000"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <Button
+        android:id="@+id/trainPilot1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/pilotPic1"
+        android:layout_alignTop="@+id/skill1"
+        android:text="Train Pilot" />
+
+    <ImageView
+        android:id="@+id/pilotPic1"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="19dp"
+        android:layout_toRightOf="@+id/pilotName1"
+        android:adjustViewBounds="true" />
 
 </RelativeLayout>

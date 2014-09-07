@@ -13,18 +13,18 @@
         android:id="@+id/action_decide_race"
         android:orderInCategory="120"
         android:showAsAction="always"
-        android:icon="@drawable/save"
+        android:icon="@drawable/decide_race"
         android:title="Decide Race"/>
     <item
         android:id="@+id/action_retire_cars"
         android:orderInCategory="140"
         android:showAsAction="always"
-        android:icon="@drawable/save"
+        android:icon="@drawable/retire"
         android:title="Retire cars"/>    
     
     <item
     android:id="@+id/menu_overflow"
-    android:icon="@drawable/cloudy"
+    android:icon="@drawable/a3dots"
     android:orderInCategory="11111"
     android:showAsAction="always">
     <menu>
@@ -38,5 +38,12 @@
 	        android:title="Help"/>
     </menu>
 </item>
-
+<item	
+	        android:id="@+id/action_settings_race"        
+	        android:showAsAction="never"        
+	        android:title="Settings"/>    
+   		<item
+	        android:id="@+id/action_help_race"	        
+	        android:showAsAction="never"        
+	        android:title="Help"/>
 </menu>

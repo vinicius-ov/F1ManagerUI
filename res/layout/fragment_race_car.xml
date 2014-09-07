@@ -56,7 +56,7 @@
         android:id="@+id/aerodynamicsCondition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/repairTires"
+        android:layout_above="@+id/repairAerodynamics"
         android:layout_alignParentRight="true"
         android:text="XXX"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -88,15 +88,6 @@
         android:text="XXX"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/TextView06"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/repairBrakes"
-        android:layout_alignParentRight="true"
-        android:text="Suspension "
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
     <Button
         android:id="@+id/repairSuspension"
         style="?android:attr/buttonStyleSmall"
@@ -104,16 +95,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/suspensionCondition"
-        android:minHeight="24dp"
-        android:text="Repair" />
-
-    <Button
-        android:id="@+id/repairAerodynamics"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/repairTires"
         android:minHeight="24dp"
         android:text="Repair" />
 
@@ -243,15 +224,6 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/upgradeSuspension"
-        android:text="Engine"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
         android:id="@+id/engineLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -317,5 +289,40 @@
         android:layout_below="@+id/raceLaps"
         android:text="Lvl 466"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/TextView06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/repairBrakes"
+        android:layout_alignParentRight="true"
+        android:text="Suspension "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/upgradeSuspension"
+        android:layout_alignParentLeft="true"
+        android:text="Engine"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Spinner
+        android:id="@+id/spinnerDriverCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/playerCashToUpgrade"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:id="@+id/repairAerodynamics"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/upgradeBrakes"
+        android:minHeight="24dp"
+        android:text="Repair" />
 
 </RelativeLayout>
